@@ -1,0 +1,81 @@
+#!/bin/bash
+
+#Update the system
+sudo apt-get update
+sudo apt-get upgrade
+
+#Install Docker and Docker Compose
+sudo apt-get install -y docker.io docker-compose
+
+#Create a directory for dauqu in /var/dauqu
+sudo mkdir /var/dauqu
+sudo mkdir /var/dauqu/server
+sudo mkdir /var/dauqu/panel
+
+#Change directory to /var/dauqu
+cd /var/dauqu/panel
+
+#Download file in dauqu directory
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/main
+
+#Change permission
+sudo chmod +x main
+
+#Run main file
+sudo ./main
+
+#Add dauqu systemctl service
+cat > /etc/systemd/system/dauqu.service <<EOF
+[Unit]
+Description=dauqu Control Panel
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/var/dauqu/main
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#Enable dauqu service
+sudo systemctl enable dauqu
+
+#Start dauqu service
+sudo systemctl start dauqu
+
+
+
+#Change directory to /var/dauqu
+cd /var/dauqu/panel
+
+#Download file in dauqu directory
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/main
+
+#Change permission
+sudo chmod +x main
+
+#Run main file
+sudo ./main
+
+#Add dauqu systemctl service
+cat > /etc/systemd/system/dauqu.service <<EOF
+[Unit]
+Description=dauqu Control Panel
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/var/dauqu/main
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#Enable dauqu service
+sudo systemctl enable dauqu
+
+#Start dauqu service
+sudo systemctl start dauqu
