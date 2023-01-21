@@ -7,6 +7,12 @@ sudo apt-get -y upgrade
 #Install Docker and Docker Compose
 sudo apt-get install -y docker.io docker-compose
 
+#Check if directory exists
+if [ -d "/var/dauqu" ]; then
+#Remove directory
+    sudo rm -rf /var/dauqu
+fi
+
 #Create a directory for dauqu in /var/dauqu
 sudo mkdir /var/dauqu
 sudo mkdir /var/dauqu/server
@@ -15,6 +21,12 @@ sudo mkdir /var/dauqu/panel
 #Change directory to /var/dauqu
 cd /var/dauqu/panel
 
+#Check if main file exists
+if [ -f "/var/dauqu/panel/main" ]; then
+#Remove main file
+    sudo rm -rf /var/dauqu/panel/main
+fi
+
 #Download file in dauqu directory
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
 
@@ -22,7 +34,7 @@ sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
 sudo chmod +x main
 
 #Add dauqu systemctl service
-cat > /etc/systemd/system/dauqu.service <<EOF
+sudo cat > /etc/systemd/system/dauqu.service <<EOF
 [Unit]
 Description=dauqu Control Panel
 
@@ -45,17 +57,24 @@ sudo systemctl start dauqu
 
 
 #Change directory to /var/dauqu
-cd / && cd /var/dauqu/server
+cd /var/dauqu/server
+
+#Check if main file exists
+if [ -f "/var/dauqu/server/main" ]; then
+#Remove main file
+    sudo rm -rf /var/dauqu/server/main
+fi 
 
 #Download file in dauqu directory
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/server/main
+
 
 #Change permission
 sudo chmod +x main
 
 
 #Add dauqu systemctl service
-cat > /etc/systemd/system/dauqu-server.service <<EOF
+sudo cat > /etc/systemd/system/dauqu-server.service <<EOF
 [Unit]
 Description=dauqu Server
 
