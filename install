@@ -16,7 +16,7 @@ sudo mkdir /var/dauqu/panel
 cd /var/dauqu/panel
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/main
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
 
 #Change permission
 sudo chmod +x main
@@ -33,7 +33,7 @@ Description=dauqu Control Panel
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/main
+ExecStart=/var/dauqu/panel/main
 
 [Install]
 WantedBy=multi-user.target
@@ -48,10 +48,10 @@ sudo systemctl start dauqu
 
 
 #Change directory to /var/dauqu
-cd /var/dauqu/panel
+cd / && cd /var/dauqu/server
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/main
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/server/main
 
 #Change permission
 sudo chmod +x main
@@ -60,22 +60,23 @@ sudo chmod +x main
 sudo ./main
 
 #Add dauqu systemctl service
-cat > /etc/systemd/system/dauqu.service <<EOF
+cat > /etc/systemd/system/dauqu-server.service <<EOF
 [Unit]
-Description=dauqu Control Panel
+Description=dauqu Server
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/main
+ExecStart=/var/dauqu/server/main
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 #Enable dauqu service
-sudo systemctl enable dauqu
+sudo systemctl enable dauqu-server
 
 #Start dauqu service
-sudo systemctl start dauqu
+sudo systemctl start dauqu-server
+
