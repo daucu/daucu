@@ -21,9 +21,6 @@ sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
 #Change permission
 sudo chmod +x main
 
-#Run main file
-sudo ./main
-
 #Add dauqu systemctl service
 cat > /etc/systemd/system/dauqu.service <<EOF
 [Unit]
@@ -56,8 +53,6 @@ sudo wget https://github.com/dauqu/dauqu-install/raw/main/server/main
 #Change permission
 sudo chmod +x main
 
-#Run main file
-sudo ./main
 
 #Add dauqu systemctl service
 cat > /etc/systemd/system/dauqu-server.service <<EOF
