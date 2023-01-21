@@ -7,6 +7,9 @@ sudo apt-get -y upgrade
 #Install Docker and Docker Compose
 sudo apt-get install -y docker.io docker-compose
 
+#Run mongoDB container for dauqu
+sudo docker run -d -p 3005:27017 --name dauqu-mongo mongo
+
 #Check if directory exists
 if [ -d "/var/dauqu" ]; then
 #Remove directory
