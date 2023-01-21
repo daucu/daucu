@@ -94,3 +94,11 @@ sudo systemctl enable dauqu-server
 #Start dauqu service
 sudo systemctl start dauqu-server
 
+
+#Show message of success installation
+echo "Dauqu installed successfully"
+echo "Open your browser and go to http://your-hostname/ui"
+echo "Enjoy!"
+
+
+
