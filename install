@@ -18,16 +18,16 @@ fi
 
 #Create a directory for dauqu in /var/dauqu
 sudo mkdir /var/dauqu
-sudo mkdir /var/dauqu/server
-sudo mkdir /var/dauqu/panel
+sudo mkdir /var/dauqu/dauqu-proxy
+sudo mkdir /var/dauqu/dauqu-panel
 
 #Change directory to /var/dauqu
-cd /var/dauqu/panel
+cd /var/dauqu/dauqu-panel
 
 #Check if main file exists
-if [ -f "/var/dauqu/panel/main" ]; then
+if [ -f "/var/dauqu/dauqu-panel/main" ]; then
 #Remove main file
-    sudo rm -rf /var/dauqu/panel/main
+    sudo rm -rf /var/dauqu/dauqu-panel/main
 fi
 
 #Download file in dauqu directory
@@ -37,7 +37,7 @@ sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
 sudo chmod +x main
 
 #Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu.service <<EOF
+sudo cat > /etc/systemd/system/dauqu-panel.service <<EOF
 [Unit]
 Description=dauqu Control Panel
 
@@ -45,27 +45,27 @@ Description=dauqu Control Panel
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/panel/main
+ExecStart=/var/dauqu/dauqu-panel/main
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 #Enable dauqu service
-sudo systemctl enable dauqu
+sudo systemctl enable dauqu-panel
 
 #Start dauqu service
-sudo systemctl start dauqu
+sudo systemctl start dauqu-panel
 
 
 
 #Change directory to /var/dauqu
-cd /var/dauqu/server
+cd /var/dauqu/dauqu-proxy
 
 #Check if main file exists
-if [ -f "/var/dauqu/server/main" ]; then
+if [ -f "/var/dauqu/dauqu-proxy/main" ]; then
 #Remove main file
-    sudo rm -rf /var/dauqu/server/main
+    sudo rm -rf /var/dauqu/dauqu-proxy/main
 fi 
 
 #Download file in dauqu directory
@@ -77,7 +77,7 @@ sudo chmod +x main
 
 
 #Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu-server.service <<EOF
+sudo cat > /etc/systemd/system/dauqu-proxy.service <<EOF
 [Unit]
 Description=dauqu Server
 
@@ -85,17 +85,17 @@ Description=dauqu Server
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/server/main
+ExecStart=/var/dauqu/dauqu-proxy/main
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 #Enable dauqu service
-sudo systemctl enable dauqu-server
+sudo systemctl enable dauqu-proxy
 
 #Start dauqu service
-sudo systemctl start dauqu-server
+sudo systemctl start dauqu-proxy
 
 
 #Show message of success installation
