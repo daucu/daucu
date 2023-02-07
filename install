@@ -31,7 +31,7 @@ if [ -f "/var/dauqu/dauqu-panel/main" ]; then
 fi
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/panel/main
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-panel/main
 
 #Change permission
 sudo chmod +x main
@@ -69,7 +69,7 @@ if [ -f "/var/dauqu/dauqu-proxy/main" ]; then
 fi 
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/server/main
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-proxy/main
 
 
 #Change permission
