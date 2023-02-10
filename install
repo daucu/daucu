@@ -91,6 +91,14 @@ ExecStart=/var/dauqu/dauqu-proxy/main
 WantedBy=multi-user.target
 EOF
 
+
+#Download frontend zip file
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
+#Move file to /var/dauqu/dauqu-panel/frontend
+sudo mv build.zip /var/dauqu/dauqu-panel/frontend/build.zip
+#Unzip file
+sudo unzip /var/dauqu/dauqu-panel/frontend/build.zip -d /var/dauqu/dauqu-panel/frontend
+
 #Enable dauqu service
 sudo systemctl enable dauqu-proxy
 
