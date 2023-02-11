@@ -91,10 +91,13 @@ ExecStart=/var/dauqu/dauqu-proxy/main
 WantedBy=multi-user.target
 EOF
 
+#Create folder for frontend
+sudo mkdir /var/dauqu/dauqu-panel/frontend
 
 #Download frontend zip file
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
 #Move file to /var/dauqu/dauqu-panel/frontend
+
 
 #Intall unzip
 sudo apt-get install -y unzip
