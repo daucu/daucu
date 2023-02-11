@@ -20,21 +20,17 @@ fi
 sudo mkdir /var/dauqu
 sudo mkdir /var/dauqu/dauqu-proxy
 sudo mkdir /var/dauqu/dauqu-panel
+sudo mkdir /var/dauqu/dauqu-panel/frontend
+
 
 #Change directory to /var/dauqu
 cd /var/dauqu/dauqu-panel
-
-#Check if main file exists
-if [ -f "/var/dauqu/dauqu-panel/main" ]; then
-#Remove main file
-    sudo rm -rf /var/dauqu/dauqu-panel/main
-fi
 
 #Download file in dauqu directory
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-panel/main
 
 #Change permission
-sudo chmod +x main
+sudo chmod +x ./main
 
 #Add dauqu systemctl service
 sudo cat > /etc/systemd/system/dauqu-panel.service <<EOF
@@ -62,18 +58,12 @@ sudo systemctl start dauqu-panel
 #Change directory to /var/dauqu
 cd /var/dauqu/dauqu-proxy
 
-#Check if main file exists
-if [ -f "/var/dauqu/dauqu-proxy/main" ]; then
-#Remove main file
-    sudo rm -rf /var/dauqu/dauqu-proxy/main
-fi 
-
 #Download file in dauqu directory
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-proxy/main
 
 
 #Change permission
-sudo chmod +x main
+sudo chmod +x ./main
 
 
 #Add dauqu systemctl service
@@ -91,8 +81,6 @@ ExecStart=/var/dauqu/dauqu-proxy/main
 WantedBy=multi-user.target
 EOF
 
-#Create folder for frontend
-sudo mkdir /var/dauqu/dauqu-panel/frontend
 
 #Download frontend zip file
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
