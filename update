@@ -1,0 +1,115 @@
+#!/bin/bash
+
+#Update the system
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+#Remove dauqu-panel service if exists
+if [ -f "/etc/systemd/system/dauqu-panel.service" ]; then
+    sudo systemctl stop dauqu-panel
+    sudo systemctl disable dauqu-panel
+    sudo rm -rf /etc/systemd/system/dauqu-panel.service
+fi 
+
+#Remove dauqu-proxy service if exists
+if [ -f "/etc/systemd/system/dauqu-proxy.service" ]; then
+    sudo systemctl stop dauqu-proxy
+    sudo systemctl disable dauqu-proxy
+    sudo rm -rf /etc/systemd/system/dauqu-proxy.service
+fi
+
+#Remove dauqu-panel directory if exists
+if [ -d "/var/dauqu/dauqu-panel" ]; then
+    sudo rm -rf /var/dauqu/dauqu-panel
+fi
+
+#Remove dauqu-proxy directory if exists
+if [ -d "/var/dauqu/dauqu-proxy" ]; then
+    sudo rm -rf /var/dauqu/dauqu-proxy
+fi
+
+#Create a directory for dauqu in /var/dauqu
+sudo mkdir /var/dauqu
+sudo mkdir /var/dauqu/dauqu-proxy
+sudo mkdir /var/dauqu/dauqu-panel
+sudo mkdir /var/dauqu/dauqu-panel/frontend
+
+#Change directory to /var/dauqu
+cd /var/dauqu/dauqu-proxy
+
+#Download file in dauqu directory
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-proxy/main
+
+
+#Change permission
+sudo chmod +x ./main 
+
+#Add dauqu systemctl service
+sudo cat > /etc/systemd/system/dauqu-proxy.service <<EOF
+[Unit]
+Description=dauqu Server
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/var/dauqu/dauqu-proxy/main
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#Enable dauqu service
+sudo systemctl enable dauqu-proxy
+
+#Start dauqu service
+sudo systemctl start dauqu-proxy
+
+#Change directory to /var/dauqu
+cd /var/dauqu/dauqu-panel
+
+#Change directory to /var/dauqu
+cd /var/dauqu/dauqu-panel
+
+
+
+#Download file in dauqu directory
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-panel/main
+
+#Change permission
+sudo chmod +x ./main
+
+#Add dauqu systemctl service
+sudo cat > /etc/systemd/system/dauqu-panel.service <<EOF
+[Unit]
+Description=dauqu Control Panel
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/var/dauqu/dauqu-panel/main
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#Enable dauqu service
+sudo systemctl enable dauqu-panel
+
+#Start dauqu service
+sudo systemctl start dauqu-panel
+
+
+
+#Download frontend zip file
+sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
+#Move file to /var/dauqu/dauqu-panel/frontend
+
+
+#Intall unzip
+sudo apt-get install -y unzip
+
+sudo mv build.zip /var/dauqu/dauqu-panel/frontend/build.zip
+#Unzip file
+sudo unzip /var/dauqu/dauqu-panel/frontend/build.zip -d /var/dauqu/dauqu-panel/frontend
