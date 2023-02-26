@@ -80,7 +80,7 @@ ExecStart=/var/dauqu/dauqu-proxy/main
 [Install]
 WantedBy=multi-user.target
 EOF
-
+ 
 
 #Download frontend zip file
 sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
