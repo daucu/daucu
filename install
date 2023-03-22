@@ -8,7 +8,7 @@ sudo apt-get -y upgrade
 sudo apt-get install -y docker.io docker-compose
 
 #Run mongoDB container for dauqu
-sudo docker run -d -p 27017:27017 --name dauqu-mongo --restart always mongo
+sudo docker run -d -p 27017:27017 --name dauqu-mongo --restart unless-stopped mongo
 
 #Check if directory exists
 if [ -d "/var/dauqu" ]; then
