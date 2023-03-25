@@ -8,7 +8,14 @@ sudo apt-get -y upgrade
 sudo apt-get install -y docker.io docker-compose
 
 #Run mongoDB container for dauqu
-sudo docker run -d -p 27017:27017 --name dauqu-mongo --restart unless-stopped mongo
+# sudo docker run -d -p 27017:27017 --name dauqu-mongo --restart unless-stopped mongo
+
+#Install MongoDB on Ubuntu
+sudo apt-get install gnupg -y
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list -y
+
+
 
 #Check if directory exists
 if [ -d "/var/dauqu" ]; then
