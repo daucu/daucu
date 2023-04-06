@@ -1,30 +1,25 @@
-Dauqu - Docker-based Deployment Panel
-Dauqu is a web-based panel that simplifies the deployment process for full-stack web applications. It utilizes Docker to manage backend and frontend code, databases, files, and other components, and provides an intuitive interface for server and Docker management, monitoring, and troubleshooting.
+# Dauqu - Docker-based Deployment Panel for Full-Stack Web Applications
 
-Features
-Easily deploy full-stack web applications with Docker
-Manage multiple projects and servers from a single panel
-Monitor server resources, Docker containers, and logs
-Securely manage files and databases
-Simplify proxy and SSL setup with Nginx and Let's Encrypt
-Quickly scale and manage Docker containers
-Getting Started
-To use Dauqu, you will need a server with Docker installed. You can either install Docker on your own server or use a cloud-based service such as AWS or Digital Ocean.
+Dauqu is a powerful and user-friendly deployment panel for full-stack web applications. With Dauqu, you can easily deploy and manage your web applications in a Docker container environment. It includes features like file management, monitoring system, Docker image container volumes management, proxy management, database management, web terminal, webmail, and more.
 
-Once you have a server with Docker, you can follow these steps to set up Dauqu:
+## Features
 
-Clone the Dauqu repository to your server
-Edit the config.json file to configure your server settings
-Run docker-compose up -d to start the Dauqu containers
-Once Dauqu is running, you can access the panel by visiting your server's IP address or domain name in your web browser. The default username and password are "admin" and "password" (without quotes), respectively.
+- User-friendly web interface for managing your Docker containers
+- Easy to use file manager for uploading, downloading and managing files
+- Integrated monitoring system for monitoring your web applications
+- Docker image container volumes management for persisting data between container restarts
+- Proxy management for routing incoming requests to the correct container
+- Database management for creating, editing and deleting databases
+- Web terminal for accessing your containers via command-line interface
+- Webmail for managing your emails
 
-Usage
-Once you have logged into Dauqu, you can use the panel to manage your projects, servers, Docker containers, and other components. The main dashboard provides an overview of your server and Docker resources, including CPU, memory, and disk usage.
+## Requirements
 
-You can add new projects and servers, manage files and databases, and configure proxy and SSL settings using the intuitive interface. Dauqu also provides real-time monitoring and logging, so you can easily troubleshoot issues and scale your Docker containers as needed.
+- Docker and Docker Compose installed on the host machine
+- A web server like Nginx or Apache to serve the Dauqu web interface
+- Basic knowledge of Docker containers and command-line interface
 
-Support and Contributions
-If you have any questions or issues with Dauqu, please open an issue on the Github repository. Contributions are also welcome, and you can submit a pull request with your changes or enhancements.
+## Installation
 
-License
-Dauqu is released under the MIT license. See LICENSE for more information.
+1. Clone this repository to your local machine:
+
