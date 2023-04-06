@@ -27,7 +27,7 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 ##Screenshots
 
 ![Image 1]([/path/to/image1.jpg](https://get.dauqu.com/screenshots/all-projects.png))
-![Image 2](/path/to/image2.jpg)
+![Image 2](https://get.dauqu.com/screenshots/all-projects.png)
 ![Image 3](/path/to/image3.jpg)
 ![Image 4](/path/to/image4.jpg)
 ![Image 5](/path/to/image5.jpg)
