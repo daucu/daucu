@@ -24,10 +24,12 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 `curl -o latest -L https://install.dauqu.com/install && sh latest`
 
 
+##Screenshots
 
-![Image 1](https://get.dauqu.com/screenshots/all-projects.png "A beautiful sunset")
-![Image 2](/path/to/image2.jpg "Cute puppy")
-![Image 3](/path/to/image3.jpg "Delicious pizza")
-![Image 4](/path/to/image4.jpg "Majestic mountains")
-![Image 5](/path/to/image5.jpg "Colorful flowers")
-![Image 6](/path/to/image6.jpg "Elegant architecture")
+![Image 1]([/path/to/image1.jpg](https://get.dauqu.com/screenshots/all-projects.png))
+![Image 2](/path/to/image2.jpg)
+![Image 3](/path/to/image3.jpg)
+![Image 4](/path/to/image4.jpg)
+![Image 5](/path/to/image5.jpg)
+![Image 6](/path/to/image6.jpg)
+
