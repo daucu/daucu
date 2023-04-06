@@ -15,11 +15,10 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 
 ## Requirements
 
-- Docker and Docker Compose installed on the host machine
-- A web server like Nginx or Apache to serve the Dauqu web interface
-- Basic knowledge of Docker containers and command-line interface
+- Ubuntu 18, 20, 22
+- Upto 4 GB CPU
 
 ## Installation
 
 1. Run command on your ubuntu server:
-```curl -o latest -L https://install.dauqu.com/install && sh latest```
+<code>curl -o latest -L https://install.dauqu.com/install && sh latest</code>
