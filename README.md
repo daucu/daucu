@@ -22,3 +22,19 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 
 1. Run command on your ubuntu server:
 `curl -o latest -L https://install.dauqu.com/install && sh latest`
+
+
+## Screenshots
+
+![Image 1](https://get.dauqu.com/screenshots/all-projects.png)
+![Image 2](https://get.dauqu.com/screenshots/database-manager.png)
+![Image 3](https://get.dauqu.com/screenshots/docker-manager.png)
+![Image 4](https://get.dauqu.com/screenshots/file-editor.png)
+![Image 5](https://get.dauqu.com/screenshots/file-manager.png)
+![Image 6](https://get.dauqu.com/screenshots/project-monitoring-light-mode.png)
+![Image 7](https://get.dauqu.com/screenshots/project-monitoring.png)
+![Image 8](https://get.dauqu.com/screenshots/proxy-manager.png)
+![Image 9](https://get.dauqu.com/screenshots/template-deployment.png)
+![Image 10](https://get.dauqu.com/screenshots/templates.png)
+![Image 7](https://get.dauqu.com/screenshots/web-terminal.png)
+
