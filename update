@@ -38,7 +38,7 @@ sudo mkdir /var/dauqu/dauqu-panel/frontend
 cd /var/dauqu/dauqu-proxy
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-proxy/main
+sudo wget https://get.dauqu.com/dauqu-proxy/main
 
 
 #Change permission
@@ -74,7 +74,7 @@ cd /var/dauqu/dauqu-panel
 
 
 #Download file in dauqu directory
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/dauqu-panel/main
+sudo wget https://get.dauqu.com/dauqu-panel/main
 
 #Change permission
 sudo chmod +x ./main
@@ -103,7 +103,7 @@ sudo systemctl start dauqu-panel
 
 
 #Download frontend zip file
-sudo wget https://github.com/dauqu/dauqu-install/raw/main/build.zip
+sudo wget https://get.dauqu.com/build.zip
 #Move file to /var/dauqu/dauqu-panel/frontend
 
 
