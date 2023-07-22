@@ -26,7 +26,11 @@ sudo apt-get install -y mongodb-org
 sudo systemctl enable mongod
 sudo systemctl start mongod
 
-
+#Install mysqql 
+sudo apt-get install -y mysql-server
+#Start mysql after reboot
+sudo systemctl enable mysql
+sudo systemctl start mysql
 
 #Check if directory exists
 if [ -d "/var/dauqu" ]; then
