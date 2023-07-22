@@ -32,6 +32,15 @@ sudo apt-get install -y mysql-server
 sudo systemctl enable mysql
 sudo systemctl start mysql
 
+#Open mysql shell
+sudo mysql -u root
+
+#-- Allow root user to connect without a password
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+
+#-- Set an empty password for the root user
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+
 #Check if directory exists
 if [ -d "/var/dauqu" ]; then
 #Remove directory
