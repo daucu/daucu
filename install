@@ -42,55 +42,55 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
 ALTER USER 'root'@'localhost' IDENTIFIED BY '';
 
 #Check if directory exists
-if [ -d "/var/dauqu" ]; then
+if [ -d "/var/daucu" ]; then
 #Remove directory
-    sudo rm -rf /var/dauqu
+    sudo rm -rf /var/daucu
 fi
 
 #Create a directory for dauqu in /var/dauqu
-sudo mkdir /var/dauqu
-sudo mkdir /var/dauqu/dauqu-proxy
-sudo mkdir /var/dauqu/dauqu-panel
-sudo mkdir /var/dauqu/dauqu-panel/frontend
+sudo mkdir /var/daucu
+sudo mkdir /var/daucu/daucu-proxy
+sudo mkdir /var/daucu/daucu-panel
+sudo mkdir /var/daucu/daucu-panel/frontend
 
 
 #Change directory to /var/dauqu
-cd /var/dauqu/dauqu-panel
+cd /var/daucu/daucu-panel
 
 #Download file in dauqu directory
-sudo wget https://get.dauqu.com/dauqu-panel/main
+sudo wget https://get.daucu.com/daucu-panel/main
 
 #Change permission
 sudo chmod +x ./main
 
 #Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu-panel.service <<EOF
+sudo cat > /etc/systemd/system/daucu-panel.service <<EOF
 [Unit]
-Description=dauqu Control Panel
+Description=daucu Control Panel
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/dauqu-panel/main
+ExecStart=/var/daucu/daucu-panel/main
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 #Enable dauqu service
-sudo systemctl enable dauqu-panel
+sudo systemctl enable daucu-panel
 
 #Start dauqu service
-sudo systemctl start dauqu-panel
+sudo systemctl start daucu-panel
 
 
 
 #Change directory to /var/dauqu
-cd /var/dauqu/dauqu-proxy
+cd /var/daucu/daucu-proxy
 
 #Download file in dauqu directory
-sudo wget https://get.dauqu.com/dauqu-proxy/main
+sudo wget https://get.daucu.com/daucu-proxy/main
 
 
 #Change permission
@@ -98,15 +98,15 @@ sudo chmod +x ./main
 
 
 #Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu-proxy.service <<EOF
+sudo cat > /etc/systemd/system/daucu-proxy.service <<EOF
 [Unit]
-Description=dauqu Server
+Description=daucu Server
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=5s
-ExecStart=/var/dauqu/dauqu-proxy/main
+ExecStart=/var/daucu/daucu-proxy/main
 
 [Install]
 WantedBy=multi-user.target
@@ -114,22 +114,22 @@ EOF
  
 
 #Download frontend zip file
-sudo wget https://get.dauqu.com/build.zip
+sudo wget https://get.daucu.com/build.zip
 #Move file to /var/dauqu/dauqu-panel/frontend
 
 
 #Intall unzip
 sudo apt-get install -y unzip
 
-sudo mv build.zip /var/dauqu/dauqu-panel/frontend/build.zip
+sudo mv build.zip /var/daucu/daucu-panel/frontend/build.zip
 #Unzip file
-sudo unzip /var/dauqu/dauqu-panel/frontend/build.zip -d /var/dauqu/dauqu-panel/frontend
+sudo unzip /var/daucu/daucu-panel/frontend/build.zip -d /var/daucu/daucu-panel/frontend
 
 #Enable dauqu service
-sudo systemctl enable dauqu-proxy
+sudo systemctl enable daucu-proxy
 
 #Start dauqu service
-sudo systemctl start dauqu-proxy
+sudo systemctl start daucu-proxy
 
 
 #Show message of success installation
