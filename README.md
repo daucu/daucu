@@ -26,15 +26,15 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 
 ## Screenshots
 
-![Image 1](https://get.dauqu.com/screenshots/all-projects.png)
-![Image 2](https://get.dauqu.com/screenshots/database-manager.png)
-![Image 3](https://get.dauqu.com/screenshots/docker-manager.png)
-![Image 4](https://get.dauqu.com/screenshots/file-editor.png)
-![Image 5](https://get.dauqu.com/screenshots/file-manager.png)
-![Image 6](https://get.dauqu.com/screenshots/project-monitoring-light-mode.png)
-![Image 7](https://get.dauqu.com/screenshots/project-monitoring.png)
-![Image 8](https://get.dauqu.com/screenshots/proxy-manager.png)
-![Image 9](https://get.dauqu.com/screenshots/template-deployment.png)
-![Image 10](https://get.dauqu.com/screenshots/templates.png)
-![Image 7](https://get.dauqu.com/screenshots/web-terminal.png)
+![Image 1](https://get.daucu.com/screenshots/all-projects.png)
+![Image 2](https://get.daucu.com/screenshots/database-manager.png)
+![Image 3](https://get.daucu.com/screenshots/docker-manager.png)
+![Image 4](https://get.daucu.com/screenshots/file-editor.png)
+![Image 5](https://get.daucu.com/screenshots/file-manager.png)
+![Image 6](https://get.daucu.com/screenshots/project-monitoring-light-mode.png)
+![Image 7](https://get.daucu.com/screenshots/project-monitoring.png)
+![Image 8](https://get.daucu.com/screenshots/proxy-manager.png)
+![Image 9](https://get.daucu.com/screenshots/template-deployment.png)
+![Image 10](https://get.daucu.com/screenshots/templates.png)
+![Image 7](https://get.daucu.com/screenshots/web-terminal.png)
 
