@@ -1,141 +1,33 @@
 #!/bin/bash
 
-#Update the system
-sudo apt-get -y update
-sudo apt-get -y upgrade
+# Stop execution if any command fails
+set -e
 
-#Install Docker and Docker Compose
-sudo apt-get install -y docker.io docker-compose
+# 1. Update and upgrade Ubuntu
+echo "Updating and upgrading Ubuntu..."
+sudo apt-get update && sudo apt-get upgrade -y
 
-#Run mongoDB container for dauqu
-# sudo docker run -d -p 27017:27017 --name dauqu-mongo --restart unless-stopped mongo
+# 2. Install Docker
+echo "Installing Docker..."
+sudo apt-get install -y docker.io
 
-#Install MongoDB on Ubuntu
-sudo apt-get install gnupg -y
-curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
-   sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
-   --dearmor
+# Ensure the Docker service is started
+sudo systemctl start docker
+# Enable Docker to start at boot
+sudo systemctl enable docker
 
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+# Add the current user to the Docker group (optional)
+# Note: You'll need to log out and log back in for this to take effect
+sudo usermod -aG docker $USER
 
-sudo apt-get update
+# 3. Pull a Docker image
+# Replace "hello-world" with your desired image
+echo "Pulling Docker image..."
+docker pull daucu/daucu_frontend
 
-sudo apt-get install -y mongodb-org
+# 4. Run the Docker image on port 3000
+# Adjust "hello-world" and port settings according to your needs
+echo "Running Docker image on port 3000..."
+docker run -d -p 3000:3000 daucu/daucu_frontend
 
-#Start mongoDB after reboot
-sudo systemctl enable mongod
-sudo systemctl start mongod
-
-#Install mysqql 
-sudo apt-get install -y mysql-server
-#Start mysql after reboot
-sudo systemctl enable mysql
-sudo systemctl start mysql
-
-#Open mysql shell
-sudo mysql -u root
-
-#-- Allow root user to connect without a password
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
-
-#-- Set an empty password for the root user
-ALTER USER 'root'@'localhost' IDENTIFIED BY '';
-
-#Check if directory exists
-if [ -d "/var/daucu" ]; then
-#Remove directory
-    sudo rm -rf /var/daucu
-fi
-
-#Create a directory for dauqu in /var/dauqu
-sudo mkdir /var/daucu
-sudo mkdir /var/daucu/daucu-proxy
-sudo mkdir /var/daucu/daucu-panel
-sudo mkdir /var/daucu/daucu-panel/frontend
-
-
-#Change directory to /var/dauqu
-cd /var/daucu/daucu-panel
-
-#Download file in dauqu directory
-sudo wget https://get.daucu.com/daucu-panel/main
-
-#Change permission
-sudo chmod +x ./main
-
-#Add dauqu systemctl service
-sudo cat > /etc/systemd/system/daucu-panel.service <<EOF
-[Unit]
-Description=daucu Control Panel
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=5s
-ExecStart=/var/daucu/daucu-panel/main
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-#Enable dauqu service
-sudo systemctl enable daucu-panel
-
-#Start dauqu service
-sudo systemctl start daucu-panel
-
-
-
-#Change directory to /var/dauqu
-cd /var/daucu/daucu-proxy
-
-#Download file in dauqu directory
-sudo wget https://get.daucu.com/daucu-proxy/main
-
-
-#Change permission
-sudo chmod +x ./main
-
-
-#Add dauqu systemctl service
-sudo cat > /etc/systemd/system/daucu-proxy.service <<EOF
-[Unit]
-Description=daucu Server
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=5s
-ExecStart=/var/daucu/daucu-proxy/main
-
-[Install]
-WantedBy=multi-user.target
-EOF
- 
-
-#Download frontend zip file
-sudo wget https://get.daucu.com/build.zip
-#Move file to /var/dauqu/dauqu-panel/frontend
-
-
-#Intall unzip
-sudo apt-get install -y unzip
-
-sudo mv build.zip /var/daucu/daucu-panel/frontend/build.zip
-#Unzip file
-sudo unzip /var/daucu/daucu-panel/frontend/build.zip -d /var/daucu/daucu-panel/frontend
-
-#Enable dauqu service
-sudo systemctl enable daucu-proxy
-
-#Start dauqu service
-sudo systemctl start daucu-proxy
-
-
-#Show message of success installation
-echo "Dauqu installed successfully"
-echo "Open your browser and go to http://your-hostname/ui"
-echo "Enjoy!"
-
-
-
+echo "Script execution completed."
