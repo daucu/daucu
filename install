@@ -28,6 +28,6 @@ docker pull daucu/daucu_frontend
 # 4. Run the Docker image on port 3000
 # Adjust "hello-world" and port settings according to your needs
 echo "Running Docker image on port 3000..."
-docker run -d -p 3000:3000 daucu/daucu_frontend
+docker run -d -p 3000:3000 --restart unless-stopped daucu/daucu_frontend
 
 echo "Script execution completed."
