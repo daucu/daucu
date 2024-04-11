@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define a function to retry a command until it succeeds
-function retry_command {
+retry_command() {
     local retries=3
     local count=0
     until "$@"; do
