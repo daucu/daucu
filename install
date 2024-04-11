@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Define a function to retry a command until it succeeds
+function retry_command {
+    local retries=3
+    local count=0
+    until "$@"; do
+        exit_code=$?
+        count=$((count+1))
+        if [ $count -lt $retries ]; then
+            echo "Retry $count/$retries..."
+            sleep 5
+        else
+            echo "Failed after $count retries."
+            exit $exit_code
+        fi
+    done
+}
+
 # Stop execution if any command fails
 set -e
 
@@ -9,7 +26,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 # 2. Install Docker
 echo "Installing Docker..."
-sudo apt-get install -y docker.io
+retry_command sudo apt-get install -y docker.io
 
 # Ensure the Docker service is started
 sudo systemctl start docker
@@ -20,18 +37,27 @@ sudo systemctl enable docker
 # Note: You'll need to log out and log back in for this to take effect
 sudo usermod -aG docker $USER
 
-# 3. Pull a Docker image
-# Replace "hello-world" with your desired image
-echo "Pulling Docker image..."
-docker pull daucu/daucu_frontend
+# 3. Pull Docker images
+echo "Pulling Docker images..."
+retry_command docker pull daucu/daucu_frontend
+retry_command docker pull daucu/daucu_backend
 
 # Get the server's public IP address
 public_ip=$(curl -s http://ifconfig.me/ip)
 
-# Run the Docker image with the public IP address
-docker run -d -p 3000:3000 --restart unless-stopped -e NEXT_PUBLIC_API_URL=http://$public_ip:9000 daucu/daucu_frontend
+# Run MongoDB container
+echo "Running MongoDB container..."
+retry_command docker run -d --name daucu_mongodb --restart unless-stopped mongo
 
-# Run backend container on port 9000 daucu/daucu_backend
-docker run -d -p 9000:9000 --restart unless-stopped daucu/daucu_backend
+# Get the MongoDB container's IP address
+mongodb_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' daucu_mongodb)
+
+# Run the backend container with MongoDB connection string
+echo "Running backend container..."
+retry_command docker run -d -p 9000:9000 --restart unless-stopped -e MONGODB_CONNECTION_STRING=mongodb://$mongodb_ip:27017 daucu/daucu_backend
+
+# Run the frontend container with the public IP address
+echo "Running frontend container..."
+retry_command docker run -d -p 3000:3000 --restart unless-stopped -e NEXT_PUBLIC_API_URL=http://$public_ip:9000 daucu/daucu_frontend
 
 echo "Script execution completed."
