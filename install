@@ -25,9 +25,13 @@ sudo usermod -aG docker $USER
 echo "Pulling Docker image..."
 docker pull daucu/daucu_frontend
 
-# 4. Run the Docker image on port 3000
-# Adjust "hello-world" and port settings according to your needs
-echo "Running Docker image on port 3000..."
-docker run -d -p 3000:3000 --restart unless-stopped daucu/daucu_frontend
+# Get the server's public IP address
+public_ip=$(curl -s http://ifconfig.me/ip)
+
+# Run the Docker image with the public IP address
+docker run -d -p 3000:3000 --restart unless-stopped -e NEXT_PUBLIC_API_URL=http://$public_ip:9000 daucu/daucu_frontend
+
+# Run backend container on port 9000 daucu/daucu_backend
+docker run -d -p 9000:9000 --restart unless-stopped daucu/daucu_backend
 
 echo "Script execution completed."
