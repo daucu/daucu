@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Retry function
+retry() {
+  local n=1
+  local max_attempts=3
+  local delay=5
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max_attempts ]]; then
+        ((n++))
+        echo "Command failed. Attempt $n/$max_attempts:"
+        sleep $delay;
+      else
+        echo "The command has failed after $n attempts."
+        return 1
+      fi
+    }
+  done
+}
+
+# installs NVM (Node Version Manager)
+retry curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# add the following to your .bashrc or .bash_profile
+export NVM_DIR="$HOME/.nvm"
+retry [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+retry [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# download and install Node.js
+retry nvm install 20
+
+# verifies the right Node.js version is in the environment
+retry node -v # should print `v20.12.2`
+# verifies the right NPM version is in the environment
+retry npm -v # should print `10.5.0`
+
+# Install PM2 
+retry npm install pm2 -g
