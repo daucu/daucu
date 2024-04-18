@@ -21,7 +21,7 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 ## Installation
 
 1. Run command on your ubuntu server:
-```sh curl -o latest -L https://get.daucu.com/install && sh latest ```
+```curl -o latest -L https://get.daucu.com/install && sh latest```
 
 
 ## Screenshots
