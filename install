@@ -55,11 +55,11 @@ retry npm install
 retry npm run build
 
 # Run in pm2
-pm2 start npm --name "frontend" -- start
+retry pm2 start npm --name "frontend" -- start
 
 # Start PM2 on boot
-pm2 startup
+retry pm2 startup
 
 # Save PM2
-pm2 save
+retry pm2 save
 
