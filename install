@@ -46,7 +46,7 @@ cd /var/daucu
 retry git clone https://github.com/daucu/daucu.git
 
 # Goto frontend
-cd /var/daucu/daucu/frontend
+cd /var/daucu/frontend
 
 # Install frontend dependencies
 retry npm install
