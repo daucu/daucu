@@ -1,63 +1,65 @@
 #!/bin/bash
 
-# Define a function to retry a command until it succeeds
-retry_command() {
-    local retries=3
-    local count=0
-    until "$@"; do
-        exit_code=$?
-        count=$((count+1))
-        if [ $count -lt $retries ]; then
-            echo "Retry $count/$retries..."
-            sleep 5
-        else
-            echo "Failed after $count retries."
-            exit $exit_code
-        fi
-    done
+# Retry function
+retry() {
+  local n=1
+  local max_attempts=3
+  local delay=5
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max_attempts ]]; then
+        ((n++))
+        echo "Command failed. Attempt $n/$max_attempts:"
+        sleep $delay;
+      else
+        echo "The command has failed after $n attempts."
+        return 1
+      fi
+    }
+  done
 }
 
-# Stop execution if any command fails
-set -e
+# installs NVM (Node Version Manager)
+retry curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# 1. Update and upgrade Ubuntu
-echo "Updating and upgrading Ubuntu..."
-sudo apt-get update && sudo apt-get upgrade -y
+# add the following to your .bashrc or .bash_profile
+export NVM_DIR="$HOME/.nvm"
+retry [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+retry [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# 2. Install Docker
-echo "Installing Docker..."
-retry_command sudo apt-get install -y docker.io
+# download and install Node.js
+retry nvm install 20
 
-# Ensure the Docker service is started
-sudo systemctl start docker
-# Enable Docker to start at boot
-sudo systemctl enable docker
+# verifies the right Node.js version is in the environment
+retry node -v # should print `v20.12.2`
+# verifies the right NPM version is in the environment
+retry npm -v # should print `10.5.0`
 
-# Add the current user to the Docker group (optional)
-# Note: You'll need to log out and log back in for this to take effect
-sudo usermod -aG docker $USER
+# Install PM2 
+retry npm install pm2 -g
 
-# 3. Pull Docker images
-echo "Pulling Docker images..."
-retry_command docker pull daucu/daucu_frontend
-retry_command docker pull daucu/daucu_backend
 
-# Get the server's public IP address
-public_ip=$(curl -s http://ifconfig.me/ip)
+# Chnage dir
+cd /var/daucu
 
-# Run MongoDB container
-echo "Running MongoDB container..."
-retry_command docker run -d --name daucu_mongodb --restart unless-stopped mongo
+# Clone git repo
+retry git clone https://github.com/daucu/daucu.git
 
-# Get the MongoDB container's IP address
-mongodb_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' daucu_mongodb)
+# Goto frontend
+cd /var/daucu/daucu/frontend
 
-# Run the backend container with MongoDB connection string
-echo "Running backend container..."
-retry_command docker run -d -p 9000:9000 --restart unless-stopped -e MONGODB_CONNECTION_STRING=mongodb://$mongodb_ip:27017 daucu/daucu_backend
+# Install frontend dependencies
+retry npm install
 
-# Run the frontend container with the public IP address
-echo "Running frontend container..."
-retry_command docker run -d -p 3000:3000 --restart unless-stopped -e NEXT_PUBLIC_API_URL=http://$public_ip:9000 daucu/daucu_frontend
+# Build frontend
+retry npm run build
 
-echo "Script execution completed."
+# Run in pm2
+pm2 start npm --name "frontend" -- start
+
+# Start PM2 on boot
+pm2 startup
+
+# Save PM2
+pm2 save
+
