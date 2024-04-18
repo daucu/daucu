@@ -1,71 +1,65 @@
 #!/bin/bash
 
-# Retry function with parameterized attempts and delay
+# Retry function
 retry() {
-  local max_attempts=${2:-3}
-  local delay=${3:-5}
   local n=1
+  local max_attempts=3
+  local delay=5
   while true; do
-    "$1" && break || {
+    "$@" && break || {
       if [[ $n -lt $max_attempts ]]; then
         ((n++))
         echo "Command failed. Attempt $n/$max_attempts:"
-        sleep $delay
+        sleep $delay;
       else
-        echo "The command has failed after $max_attempts attempts."
+        echo "The command has failed after $n attempts."
         return 1
       fi
     }
   done
 }
 
-# Load NVM and dependencies
-load_nvm() {
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-}
+# installs NVM (Node Version Manager)
+retry curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Function to install and configure Node.js
-install_node() {
-  retry "nvm install 20" 3 10
-  retry "node -v | grep 'v20.12.2'" 3 5
-  retry "npm -v | grep '10.5.0'" 3 5
-}
+# add the following to your .bashrc or .bash_profile
+export NVM_DIR="$HOME/.nvm"
+retry [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+retry [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Main function to manage installation and setup
-main() {
-  # installs NVM (Node Version Manager)
-  retry "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash" 3 5
-  load_nvm
-  install_node
+# download and install Node.js
+retry nvm install 20
 
-  # Install PM2 globally
-  retry "npm install pm2 -g" 3 10
+# verifies the right Node.js version is in the environment
+retry node -v # should print `v20.12.2`
+# verifies the right NPM version is in the environment
+retry npm -v # should print `10.5.0`
 
-  local repo_dir="/var/daucu"
+# Install PM2 
+retry npm install pm2 -g
 
-  # Ensure the directory exists and is accessible
-  mkdir -p "$repo_dir"
-  cd "$repo_dir" || { echo "Failed to change directory to $repo_dir"; exit 1; }
 
-  # Clone git repo
-  retry "git clone https://github.com/daucu/daucu.git" 3 10
+# Chnage dir
+cd /var/daucu
 
-  # Change to frontend directory
-  cd "${repo_dir}/frontend" || { echo "Failed to change directory to ${repo_dir}/frontend"; exit 1; }
+# Clone git repo
+retry git clone https://github.com/daucu/daucu.git
 
-  # Install frontend dependencies and build
-  retry "npm install" 3 10
-  retry "npm run build" 3 10
+# Goto frontend
+cd /var/daucu/frontend
 
-  # Run frontend in pm2
-  pm2 start npm --name "frontend" -- start
+# Install frontend dependencies
+retry npm install
 
-  # Setup PM2 to start on boot and save the PM2 state
-  pm2 startup
-  pm2 save
-}
+# Build frontend
+retry npm run build
 
-# Run the main function
-main
+# Run in pm2
+pm2 start npm --name "frontend" -- start
+
+# Start PM2 on boot
+pm2 startup
+
+# Save PM2
+pm2 save
+
