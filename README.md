@@ -1,4 +1,4 @@
-![Discord Banner 2](https://discordapp.com/api/guilds/aFHPXrQZ/widget.png?style=banner2)
+![Discord Banner 2](https://discordapp.com/api/guilds/[1239945892136751146]/widget.png?style=banner2)
 
 
 
