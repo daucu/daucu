@@ -1,3 +1,6 @@
+[![Join our Discord server!](https://img.shields.io/discord/123456789012345678?color=7289da&label=Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/URJhmQf6)
+
+
 # Dauqu - Docker-based Deployment Panel for Full-Stack Web Applications
 
 Dauqu is a powerful and user-friendly deployment panel for full-stack web applications. With Dauqu, you can easily deploy and manage your web applications in a Docker container environment. It includes features like file management, monitoring system, Docker image container volumes management, proxy management, database management, web terminal, webmail, and more.
