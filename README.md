@@ -1,4 +1,4 @@
-[![Join our Discord server!](https://img.shields.io/discord/123456789012345678?color=7289da&label=Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/URJhmQf6)
+![Discord Banner 2](https://discordapp.com/api/guilds/aFHPXrQZ/widget.png?style=banner2)
 
 
 
