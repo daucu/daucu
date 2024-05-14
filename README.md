@@ -1,4 +1,4 @@
-![Discord Banner 3](https://discordapp.com/api/guilds/1239945892136751146/widget.png?style=banner3)
+[![Join our Discord server!](https://img.shields.io/discord/1239945892136751146?color=7289da&label=Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/URJhmQf6)
 
 
 
