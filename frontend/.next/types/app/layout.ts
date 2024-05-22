@@ -1,4 +1,4 @@
-// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu_frontend\src\app\layout.js
+// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu\frontend\src\app\layout.js
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

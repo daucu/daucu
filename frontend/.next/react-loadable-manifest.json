@@ -1,1 +1,34 @@
-{}
+{
+  "app\\console\\(tempates)\\devops\\deploy\\page.jsx -> react-lazylog": {
+    "id": 73070,
+    "files": [
+      "static/chunks/5784.e55a4f7b2d4f9e43.js",
+      "static/chunks/1262.b3ef7f42d3bd77e6.js"
+    ]
+  },
+  "app\\console\\(tempates)\\mysql\\[id]\\components\\logs.jsx -> react-lazylog": {
+    "id": 73070,
+    "files": [
+      "static/chunks/5784.e55a4f7b2d4f9e43.js"
+    ]
+  },
+  "app\\console\\(tempates)\\mysql\\[id]\\components\\query.jsx -> react-lazylog": {
+    "id": 73070,
+    "files": [
+      "static/chunks/5784.e55a4f7b2d4f9e43.js"
+    ]
+  },
+  "app\\console\\(tempates)\\web\\[id]\\components\\logs.jsx -> react-lazylog": {
+    "id": 73070,
+    "files": [
+      "static/chunks/5784.e55a4f7b2d4f9e43.js"
+    ]
+  },
+  "app\\console\\(tempates)\\web\\[id]\\components\\notes.jsx -> react-quill": {
+    "id": 98436,
+    "files": [
+      "static/chunks/8012d7e2.d22bf7f321a30dbf.js",
+      "static/chunks/8436.7ff25a750239f5f3.js"
+    ]
+  }
+}

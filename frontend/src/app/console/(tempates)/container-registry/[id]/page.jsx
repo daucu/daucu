@@ -1,7 +1,5 @@
 "use client";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import Information from "./components/information";
 import QuickStart from "./components/quick-start";

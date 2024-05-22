@@ -1,4 +1,4 @@
-// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu_frontend\src\app\api\home\route.js
+// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu\frontend\src\app\api\home\route.js
 import * as entry from '../../../../../src/app/api/home/route.js'
 import type { NextRequest } from 'next/server.js'
 
