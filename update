@@ -1,115 +1,55 @@
 #!/bin/bash
 
-#Update the system
-sudo apt-get -y update
-sudo apt-get -y upgrade
+# Retry function
+retry() {
+  local n=1
+  local max_attempts=3
+  local delay=5
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max_attempts ]]; then
+        ((n++))
+        echo "Command failed. Attempt $n/$max_attempts:"
+        sleep $delay;
+      else
+        echo "The command has failed after $n attempts."
+        return 1
+      fi
+    }
+  done
+}
 
-#Remove dauqu-panel service if exists
-if [ -f "/etc/systemd/system/dauqu-panel.service" ]; then
-    sudo systemctl stop dauqu-panel
-    sudo systemctl disable dauqu-panel
-    sudo rm -rf /etc/systemd/system/dauqu-panel.service
-fi 
+# Stop the frontend Docker container
+retry sudo docker stop daucu_frontend
+retry sudo docker rm daucu_frontend
 
-#Remove dauqu-proxy service if exists
-if [ -f "/etc/systemd/system/dauqu-proxy.service" ]; then
-    sudo systemctl stop dauqu-proxy
-    sudo systemctl disable dauqu-proxy
-    sudo rm -rf /etc/systemd/system/dauqu-proxy.service
-fi
+# Stop the backend service
+retry sudo systemctl stop daucu_backend
 
-#Remove dauqu-panel directory if exists
-if [ -d "/var/dauqu/dauqu-panel" ]; then
-    sudo rm -rf /var/dauqu/dauqu-panel
-fi
+# Update frontend code from the git repository
+cd /var/daucu/frontend
+retry git pull origin main
 
-#Remove dauqu-proxy directory if exists
-if [ -d "/var/dauqu/dauqu-proxy" ]; then
-    sudo rm -rf /var/dauqu/dauqu-proxy
-fi
+# Install frontend dependencies
+retry npm install
 
-#Create a directory for dauqu in /var/dauqu
-sudo mkdir /var/dauqu
-sudo mkdir /var/dauqu/dauqu-proxy
-sudo mkdir /var/dauqu/dauqu-panel
-sudo mkdir /var/dauqu/dauqu-panel/frontend
+# Build the frontend
+retry npm run build
 
-#Change directory to /var/dauqu
-cd /var/dauqu/dauqu-proxy
+# Run the updated frontend Docker image
+retry sudo docker run -d --name daucu_frontend -p 3000:3000 daucu/daucu_frontend
 
-#Download file in dauqu directory
-sudo wget https://get.dauqu.com/dauqu-proxy/main
+# Download the updated Go executable for the backend
+retry curl -o /usr/local/bin/daucu_backend https://get.daucu.com/backend/main
 
+# Make the executable file executable
+sudo chmod +x /usr/local/bin/daucu_backend
 
-#Change permission
-sudo chmod +x ./main 
+# Reload systemd to recognize the new service
+retry sudo systemctl daemon-reload
 
-#Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu-proxy.service <<EOF
-[Unit]
-Description=dauqu Server
+# Enable and start the new backend service
+retry sudo systemctl enable daucu_backend
+retry sudo systemctl start daucu_backend
 
-[Service]
-Type=simple
-Restart=always
-RestartSec=5s
-ExecStart=/var/dauqu/dauqu-proxy/main
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-#Enable dauqu service
-sudo systemctl enable dauqu-proxy
-
-#Start dauqu service
-sudo systemctl start dauqu-proxy
-
-#Change directory to /var/dauqu
-cd /var/dauqu/dauqu-panel
-
-#Change directory to /var/dauqu
-cd /var/dauqu/dauqu-panel
-
-
-
-#Download file in dauqu directory
-sudo wget https://get.dauqu.com/dauqu-panel/main
-
-#Change permission
-sudo chmod +x ./main
-
-#Add dauqu systemctl service
-sudo cat > /etc/systemd/system/dauqu-panel.service <<EOF
-[Unit]
-Description=dauqu Control Panel
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=5s
-ExecStart=/var/dauqu/dauqu-panel/main
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-#Enable dauqu service
-sudo systemctl enable dauqu-panel
-
-#Start dauqu service
-sudo systemctl start dauqu-panel
-
-
-
-#Download frontend zip file
-sudo wget https://get.dauqu.com/build.zip
-#Move file to /var/dauqu/dauqu-panel/frontend
-
-
-#Intall unzip
-sudo apt-get install -y unzip
-
-sudo mv build.zip /var/dauqu/dauqu-panel/frontend/build.zip
-#Unzip file
-sudo unzip /var/dauqu/dauqu-panel/frontend/build.zip -d /var/dauqu/dauqu-panel/frontend
+echo "Update completed successfully!"
