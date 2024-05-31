@@ -130,8 +130,5 @@ retry sudo systemctl start daucu_backend
 
 echo "Setup completed successfully!"
 
-# Get the server's IP address
-IP_ADDRESS=$(hostname -I | awk '{print $1}')
-
 # Output the message to browse to the frontend
-echo "Setup completed successfully! You can browse the application at http://$IP_ADDRESS:3000"
+echo "Setup completed successfully! You can browse the application at http://your_public_ip:3000"
