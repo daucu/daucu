@@ -23,21 +23,9 @@ retry() {
 retry sudo docker stop daucu_frontend
 retry sudo docker rm daucu_frontend
 
-# Stop the backend service
-retry sudo systemctl stop daucu_backend
-
-# Update frontend code from the git repository
-cd /var/daucu/frontend
-retry git pull origin main
-
-# Install frontend dependencies
-retry npm install
-
-# Build the frontend
-retry npm run build
 
 # Run the updated frontend Docker image
-retry sudo docker run -d --name daucu_frontend -p 3000:3000 daucu/daucu_frontend
+retry sudo docker run -d --name daucu_frontend -p 3000:3000 --restart always daucu/daucu_frontend
 
 # Download the updated Go executable for the backend
 retry curl -o /usr/local/bin/daucu_backend https://get.daucu.com/backend/main

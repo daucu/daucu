@@ -98,7 +98,7 @@ retry sudo systemctl start docker
 retry sudo systemctl enable docker
 
 # Run frontend Docker image
-retry sudo docker run -d --name daucu_frontend -p 3000:3000 daucu/daucu_frontend
+retry sudo docker run -d --name daucu_frontend -p 3000:3000 --restart always daucu/daucu_frontend
 
 # Download Go executable
 retry curl -o /usr/local/bin/daucu_backend https://get.daucu.com/backend/main
@@ -129,3 +129,9 @@ retry sudo systemctl enable daucu_backend
 retry sudo systemctl start daucu_backend
 
 echo "Setup completed successfully!"
+
+# Get the server's IP address
+IP_ADDRESS=$(hostname -I | awk '{print $1}')
+
+# Output the message to browse to the frontend
+echo "Setup completed successfully! You can browse the application at http://$IP_ADDRESS:3000"
