@@ -87,7 +87,7 @@ retry() {
 }
 
 # Update system
-retry sudo apt-get update
+retry sudo apt-get update -y
 retry sudo apt-get upgrade -y
 
 # Install Docker
