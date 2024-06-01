@@ -97,11 +97,86 @@ retry sudo apt-get install -y docker.io
 retry sudo systemctl start docker
 retry sudo systemctl enable docker
 
-# Run frontend Docker image
-retry sudo docker run -d --name daucu_frontend -p 3000:3000 --restart always daucu/daucu_frontend
+# Initialize Docker Swarm
+retry sudo docker swarm init
+
+# Create Traefik configuration file
+cat <<EOF | sudo tee ./traefik.yml
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+
+log:
+  level: DEBUG
+EOF
+
+# Create Docker Compose file for Traefik
+cat <<EOF | sudo tee docker-compose.yml
+version: "3"
+
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    ports:
+      - "80:80" # The HTTP port
+      - "443:443" # The HTTPS port
+      - "8080:8080" # The Web UI (enabled by --api.insecure=true)
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" # So that Traefik can listen to the Docker events
+      - "./traefik.yml:/traefik.yml:ro"
+    command:
+      - "--configFile=/traefik.yml"
+EOF
+
+# Deploy Traefik stack using Docker Compose
+retry sudo docker stack deploy -c docker-compose.yml traefik
+
+# Deploy daucu_frontend service
+retry sudo docker service create \
+  --name daucu_frontend \
+  --publish 3000:3000 \
+  --restart-condition any \
+  --restart-delay 5s \
+  --restart-max-attempts 3 \
+  --restart-window 120s \
+  daucu/daucu_frontend
+
+# Create a Docker Compose file for MongoDB with a different name (mongo-stack.yml)
+cat <<EOF > mongo-stack.yml
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+volumes:
+  mongo-data:
+EOF
+
+# Deploy the stack using Docker Swarm with the specified file name
+retry sudo docker stack deploy -c mongo-stack.yml mongo_stack
 
 # Download Go executable
-retry curl -o /usr/local/bin/daucu_backend https://get.daucu.com/backend/main
+retry curl -Lo /usr/local/bin/daucu_backend https://get.daucu.com/backend/main
 
 # Make the executable file executable
 sudo chmod +x /usr/local/bin/daucu_backend
