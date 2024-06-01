@@ -2,9 +2,9 @@
 
 
 
-# Dauqu - Docker-based Deployment Panel for Full-Stack Web Applications
+# Daucu - Docker-based Deployment Panel for Full-Stack Web Applications
 
-Dauqu is a powerful and user-friendly deployment panel for full-stack web applications. With Dauqu, you can easily deploy and manage your web applications in a Docker container environment. It includes features like file management, monitoring system, Docker image container volumes management, proxy management, database management, web terminal, webmail, and more.
+Daucu is a powerful and user-friendly deployment panel for full-stack web applications. With Daucu, you can easily deploy and manage your web applications in a Docker container environment. It includes features like file management, monitoring system, Docker image container volumes management, proxy management, database management, web terminal, webmail, and more.
 
 ## Features
 
@@ -30,15 +30,13 @@ Dauqu is a powerful and user-friendly deployment panel for full-stack web applic
 
 ## Screenshots
 
-![Image 1](https://get.daucu.com/screenshots/all-projects.png)
-![Image 2](https://get.daucu.com/screenshots/database-manager.png)
-![Image 3](https://get.daucu.com/screenshots/docker-manager.png)
-![Image 4](https://get.daucu.com/screenshots/file-editor.png)
-![Image 5](https://get.daucu.com/screenshots/file-manager.png)
-![Image 6](https://get.daucu.com/screenshots/project-monitoring-light-mode.png)
-![Image 7](https://get.daucu.com/screenshots/project-monitoring.png)
-![Image 8](https://get.daucu.com/screenshots/proxy-manager.png)
-![Image 9](https://get.daucu.com/screenshots/template-deployment.png)
-![Image 10](https://get.daucu.com/screenshots/templates.png)
-![Image 7](https://get.daucu.com/screenshots/web-terminal.png)
+![Image 1](https://get.daucu.com/screenshots/Screenshot-2024-06-01-075117.png)
+![Image 2](https://get.daucu.com/screenshots/Screenshot-2024-06-01-075227.png)
+![Image 3](https://get.daucu.com/screenshots/Screenshot-2024-06-01-075316.png)
+![Image 4](https://get.daucu.com/screenshots/Screenshot-2024-06-01-075405.png)
+![Image 5](https://get.daucu.com/screenshots/Screenshot-2024-06-01-075444.png)
+![Image 6](https://get.daucu.com/screenshots/Screenshot-2024-06-01-080100.png)
+![Image 7](https://get.daucu.com/screenshots/Screenshot-2024-06-01-080145.png)
+![Image 8](https://get.daucu.com/screenshots/Screenshot-2024-06-01-080233.png)
+![Image 9](https://get.daucu.com/screenshots/Screenshot-2024-06-01-080314.png)
 
