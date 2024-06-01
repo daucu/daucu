@@ -1,0 +1,25 @@
+# docker stack deploy -c docker-compose.yml traefik
+
+version: "3"
+
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    ports:
+      - "80:80" # The HTTP port
+      - "443:443" # The HTTPS port
+      - "8080:8080" # The Web UI (enabled by --api.insecure=true)
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" # So that Traefik can listen to the Docker events
+      - "./traefik.yml:/traefik.yml:ro"
+    command:
+      - "--configFile=/traefik.yml"
+
+  whoami:
+    image: containous/whoami # A simple service that returns its container ID
+    container_name: whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`server.daucu.com`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
