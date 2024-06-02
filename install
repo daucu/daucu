@@ -154,26 +154,15 @@ retry sudo docker service create \
   daucu/daucu_frontend
 
 # Create a Docker Compose file for MongoDB with a different name (mongo-stack.yml)
-cat <<EOF > mongo-stack.yml
-version: '3.8'
+retry docker run -d \
+  --name mongo \
+  --restart always \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=cuspufrlqlp \
+  -v mongo-data:/data/db \
+  mongo:latest
 
-services:
-  mongo:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-    volumes:
-      - mongo-data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-volumes:
-  mongo-data:
-EOF
-
-# Deploy the stack using Docker Swarm with the specified file name
-retry sudo docker stack deploy -c mongo-stack.yml mongo_stack
 
 # Download Go executable
 retry curl -Lo /usr/local/bin/daucu_backend https://get.daucu.com/backend/main
