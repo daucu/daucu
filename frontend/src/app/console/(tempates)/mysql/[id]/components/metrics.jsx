@@ -275,7 +275,7 @@ export default function Analytics({ label }) {
     setLoading(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/analytics/${label}`, {
+        .get(`/api/site/analytics/${label}`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

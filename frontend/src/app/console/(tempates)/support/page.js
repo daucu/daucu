@@ -59,7 +59,7 @@ export default function Page(params) {
     setGettingAccounts(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/auth/profile`, {
+        .get(`/api/auth/profile`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

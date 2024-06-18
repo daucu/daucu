@@ -14,7 +14,7 @@ export default function Page(params) {
     setGettingDisk(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/scheduler/get-jobs`, {
+        .get(`/api/scheduler/get-jobs`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ export default function Page(params) {
     setCreatingDisk(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/scheduler/new-job`,
+        `/api/scheduler/new-job`,
         {
           name: name,
           schedule: "*/5 * * * *",
@@ -86,7 +86,7 @@ export default function Page(params) {
   async function deleteJob(id) {
     await axios
       .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/scheduler/delete-job/${id}`,
+        `/api/scheduler/delete-job/${id}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
@@ -112,7 +112,7 @@ export default function Page(params) {
     <div>
       <div className="flex w-auto h-full flex-col">
         <blockquote className="bg-gray-100 border-l-[5px] border-blue-600 dark:border-gray-500 dark:bg-gray-800">
-          <div className="h-auto dark:bg-slate-900 p-3 space-y-2">
+          <div className="h-auto dark:bg-slate-900 p-2 space-y-2">
             {/* Heading */}
             <div className="flex flex-col justify-between items-start">
               <h1 className="text-xl font-bold dark:text-gray-400 text-black">

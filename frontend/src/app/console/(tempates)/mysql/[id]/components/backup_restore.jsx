@@ -12,7 +12,7 @@ export default function Databases() {
     setGetting(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/devops/get-files`, {
+        .get(`/api/devops/get-files`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -61,7 +61,7 @@ export default function Databases() {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/upload-file`,
+          `/api/devops/upload-file`,
           formData,
           {
             headers: {
@@ -104,7 +104,7 @@ export default function Databases() {
     try {
       await axios
         .delete(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/delete-file/${id}/${label}`,
+          `/api/devops/delete-file/${id}/${label}`,
           {
             headers: {
               "Content-Type": "application/json", // Set JSON content type header
@@ -142,7 +142,7 @@ export default function Databases() {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/create-project-from-file`,
+          `/api/devops/create-project-from-file`,
           {
             id: id,
           },
@@ -190,7 +190,7 @@ export default function Databases() {
 
     await axios
       .patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/update-file/${updateData?._id}`,
+        `/api/devops/update-file/${updateData?._id}`,
         formData,
         {
           headers: {

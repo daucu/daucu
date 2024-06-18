@@ -86,7 +86,7 @@ export default function Page(params) {
   async function mySitesFunction() {
     setloadingData(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/kube/my-sites`, {
+      .get(`/api/kube/my-sites`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },

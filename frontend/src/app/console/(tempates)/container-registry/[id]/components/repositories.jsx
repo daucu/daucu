@@ -11,7 +11,7 @@ export default function Repositories({ label }) {
     setGetting(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/cr/registries`, {
+        .get(`/api/cr/registries`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

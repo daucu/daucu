@@ -1,4 +1,4 @@
-// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu\frontend\src\app\console\(tempates)\devops\deploy\page.jsx
+// File: C:\Users\Harsh singh\Documents\daucu\self-hosted\daucu_frontend\src\app\console\(tempates)\devops\deploy\page.jsx
 import * as entry from '../../../../../../../src/app/console/(tempates)/devops/deploy/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

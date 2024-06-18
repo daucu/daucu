@@ -37,29 +37,3 @@ retry npm -v # should print `10.5.0`
 
 # Install PM2 
 retry npm install pm2 -g
-
-
-# Chnage dir
-cd /var/daucu
-
-# Clone git repo
-retry git clone https://github.com/daucu/daucu.git
-
-# Goto frontend
-cd /var/daucu/daucu/frontend
-
-# Install frontend dependencies
-retry npm install
-
-# Build frontend
-retry npm run build
-
-# Run in pm2
-pm2 start npm --name "frontend" -- start
-
-# Start PM2 on boot
-pm2 startup
-
-# Save PM2
-pm2 save
-

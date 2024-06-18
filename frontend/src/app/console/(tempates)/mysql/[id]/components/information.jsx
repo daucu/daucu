@@ -2,15 +2,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useSearchParams } from 'next/navigation'
 
 export default function Information({ label }) {
   const [gettingDetails, setGettingDetails] = useState(true);
   const [siteDetails, setSiteDetails] = useState(null);
+
+  const searchParams = useSearchParams()
+  const search_label = searchParams.get('label')
+
+  console.log(search_label)
+
   //Get websites details
   async function getWebsiteDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/mysql/get-cluster/${label}`, {
+      .get(`/api/mysql/get-cluster/${search_label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },

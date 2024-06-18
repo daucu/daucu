@@ -14,7 +14,7 @@ export default function UsersAndGrands(params) {
     setGettingDisk(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/disk/get-my-disk`, {
+        .get(`/api/disk/get-my-disk`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ export default function UsersAndGrands(params) {
     setCreatingDisk(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/disk/create-disk`,
+        `/api/disk/create-disk`,
         {
           label: name,
           region: region,

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: true });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const modules = {
   toolbar: [
@@ -56,7 +56,7 @@ export default function Notes({ label }) {
     setUpdating(true);
     await axios
       .patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/create-notes`,
+        `/api/site/create-notes`,
         {
           label: label,
           Content: value,
@@ -83,7 +83,7 @@ export default function Notes({ label }) {
   async function getNotes() {
     setGettingNotes(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/get-notes/${label}`, {
+      .get(`/api/site/get-notes/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },

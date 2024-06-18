@@ -10,7 +10,7 @@ export default function Information({ label }) {
   async function getWebsiteDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/kube/get-sites/${label}`, {
+      .get(`/api/kube/get-sites/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -91,7 +91,7 @@ export default function Information({ label }) {
                         <span className="font-bold">DNS:</span>{" "}
                         {gettingDetails
                           ? "Loading..."
-                          : siteDetails?.deployment?.name + ".dauqu.host" ||
+                          : siteDetails?.site?.label + ".daucu.site" ||
                             "N/A"}
                       </p>
                       <p className="p-2 border-l-2 border-blue-600 dark:bg-transparent mt-1">

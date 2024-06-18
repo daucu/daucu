@@ -109,7 +109,7 @@ export default function Page(params) {
     setGettingDisk(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/dashboard/overview`, {
+        .get(`/api/dashboard/overview`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

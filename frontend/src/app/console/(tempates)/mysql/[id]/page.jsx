@@ -24,6 +24,8 @@ export default function Page(id) {
   const currentTab = searchParams.get("tab");
   const [selectedTab, setSelectedTab] = useState(currentTab || "information");
 
+  const search_label = searchParams.get("label");
+
   let content;
 
   switch (selectedTab) {
@@ -73,9 +75,13 @@ export default function Page(id) {
 
   useEffect(() => {
     if (!currentTab) {
-      router.push(`/console/mysql/${label}?tab=information`, undefined, {
-        shallow: true,
-      });
+      router.push(
+        `/console/mysql/details?tab=information&label=${search_label}`,
+        undefined,
+        {
+          shallow: true,
+        }
+      );
     }
   }, []);
 
@@ -112,7 +118,7 @@ export default function Page(id) {
                       }`}
                       onClick={() => {
                         router.push(
-                          `/console/mysql/${label}?tab=information`
+                          `/console/mysql/details?tab=information&label=${search_label}`
                         );
                       }}
                     >
@@ -137,7 +143,7 @@ export default function Page(id) {
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
-                        router.push(`/console/mysql/${label}?tab=databases`);
+                        router.push(`/console/mysql/details?tab=databases&label=${search_label}`);
                       }}
                     >
                       <svg
@@ -234,7 +240,7 @@ export default function Page(id) {
                       }`}
                       onClick={() => {
                         router.push(
-                          `/console/mysql/${label}?tab=compute-storage`
+                          `/console/mysql/details?tab=compute-storage&label=${search_label}`
                         );
                       }}
                     >
@@ -260,7 +266,7 @@ export default function Page(id) {
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
-                        router.push(`/console/mysql/${label}?tab=logs`);
+                        router.push(`/console/mysql/details?tab=logs&label=${search_label}`);
                       }}
                     >
                       <svg
@@ -308,7 +314,7 @@ export default function Page(id) {
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
-                        router.push(`/console/mysql/${label}?tab=metrics`);
+                        router.push(`/console/mysql/details?tab=metrics&label=${search_label}`);
                       }}
                     >
                       <svg
@@ -331,9 +337,7 @@ export default function Page(id) {
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
-                        router.push(
-                          `/console/mysql/${label}?tab=replication`
-                        );
+                        router.push(`/console/mysql/details?tab=replication&label=${search_label}`);
                       }}
                     >
                       <svg
@@ -356,7 +360,7 @@ export default function Page(id) {
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
-                        router.push(`/console/mysql/${label}?tab=settings`);
+                        router.push(`/console/mysql/details?tab=settings&label=${search_label}`);
                       }}
                     >
                       <svg

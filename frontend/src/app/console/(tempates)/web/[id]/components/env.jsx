@@ -14,7 +14,7 @@ export default function Env({ label }) {
   async function getWebenvDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/kube/get-env/${label}`, {
+      .get(`/api/kube/get-env/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -48,7 +48,7 @@ export default function Env({ label }) {
     setAddingEnv(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/kube/add-env`,
+        `/api/kube/add-env`,
         {
           Label: label,
           Variables: makeEnvArray(),
@@ -76,7 +76,7 @@ export default function Env({ label }) {
     setDeletingEnv(key);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/kube/delete-env`,
+        `/api/kube/delete-env`,
         {
           Label: label,
           Variable: key,

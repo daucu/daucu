@@ -11,20 +11,13 @@ export default function Header() {
 
   //Onscroll
   const [scroll, setScroll] = useState(false);
-  const handleScroll = () => {
-    if (window.scrollY >= 1) {
-      setScroll(true);
-    } else {
-      setScroll(false);
-    }
-  };
 
   const [resp, setResp] = useState(false);
   async function checkLogin() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/check-login`,
+        `/api/auth/check-login`,
         {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
@@ -55,7 +48,7 @@ export default function Header() {
             src="/logo-no-background.png"
             className="h-9 cursor-pointer"
             onClick={() => {
-              window.location.href = "/";
+              
             }}
           />
         </div>
@@ -307,7 +300,7 @@ export default function Header() {
           ) : (
             <div>
               <Link
-                href="/dashboard/overview"
+                href="/console/overview"
                 className={`btn btn-xs mr-2 no-animation rounded-md`}
                 onClick={() => {
                   setLoading("dashboard");

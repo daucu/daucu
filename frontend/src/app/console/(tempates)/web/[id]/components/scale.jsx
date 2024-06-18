@@ -16,7 +16,7 @@ export default function Replication({ label }) {
     setScalling(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/update-replica`,
+        `/api/site/update-replica`,
         {
           label: label,
           replicaCount: rangeToNumber,
@@ -130,7 +130,7 @@ export default function Replication({ label }) {
   async function getReplicaDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/read-replica/${label}`, {
+      .get(`/api/site/read-replica/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -155,7 +155,7 @@ export default function Replication({ label }) {
     setUpdating(true);
     await axios
       .patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/update-replica`,
+        `/api/site/update-replica`,
         {
           label: label,
           plan: selected,

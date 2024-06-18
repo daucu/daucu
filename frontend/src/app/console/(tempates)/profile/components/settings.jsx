@@ -10,7 +10,7 @@ export default function Settings() {
     setGetting(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/devops/get-files`, {
+        .get(`/api/devops/get-files`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ export default function Settings() {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/create-project-from-file`,
+          `/api/devops/create-project-from-file`,
           {
             id: id,
           },

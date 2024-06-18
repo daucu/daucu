@@ -11,7 +11,7 @@ export default function QuickStart({ id }) {
     setGetting(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/cr/details/${id}`, {
+        .get(`/api/cr/details/${id}`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

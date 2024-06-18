@@ -664,7 +664,7 @@ export default function Page(params) {
     setDockerDeploying(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/kube/template-deploy`,
+        `/api/kube/template-deploy`,
         {
           name: template.name.toLowerCase(),
           image: template.image,
@@ -765,10 +765,8 @@ export default function Page(params) {
                         />
                         <div className="flex flex-col">
                           <div className="flex w-full justify-between">
-                            <Image
+                            <img
                               src={item.icon}
-                              width={0}
-                              height={0}
                               alt=""
                               className="w-10 h-10"
                             />

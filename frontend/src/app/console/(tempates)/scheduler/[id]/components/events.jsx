@@ -12,7 +12,7 @@ export default function Events({ label }) {
     try {
       await axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/scheduler/job-events/${label}`,
+          `/api/scheduler/job-events/${label}`,
           {
             headers: {
               "Content-Type": "application/json", // Set JSON content type header

@@ -16,7 +16,7 @@ export default function Install() {
 
     async function createFirstUser() {
         setLoading(true);
-        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/auth/register`, {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, {
             Username: username,
             Password: password,
             Email: email,

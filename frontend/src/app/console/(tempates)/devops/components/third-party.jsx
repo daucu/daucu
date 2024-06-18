@@ -14,7 +14,7 @@ export default function ThirdParty() {
     setGitDeploying(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/create-project`,
+        `/api/devops/create-project`,
         {
           context: {
             type: "public_git",

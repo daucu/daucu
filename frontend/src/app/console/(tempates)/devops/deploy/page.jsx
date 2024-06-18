@@ -47,7 +47,7 @@ export default function Page() {
     try {
       await axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/project-details/${ProjectID}`,
+          `/api/devops/project-details/${ProjectID}`,
           {
             headers: {
               "Content-Type": "application/json", // Set JSON content type header
@@ -96,7 +96,7 @@ export default function Page() {
 
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/build-project`,
+        `/api/devops/build-project`,
         {
           project_id: ProjectID,
           name: name,
@@ -138,7 +138,7 @@ export default function Page() {
 
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/devops/rebuild-project`,
+        `/api/devops/rebuild-project`,
         {
           project_id: ProjectID,
         },
@@ -355,7 +355,7 @@ export default function Page() {
   //Websocket connection
   const [logs, setLogs] = useState([]);
 
-  const websocketUrl = `wss://api.daucu.com/v1/site/logs-realtime/${label}/${label}`; // Replace with your specific WebSocket URL
+  const websocketUrl = `wss://api.daucu.com/api/site/logs-realtime/${label}/${label}`; // Replace with your specific WebSocket URL
 
   useEffect(() => {
     const websocket = new WebSocket(websocketUrl);
@@ -557,7 +557,7 @@ export default function Page() {
 
                           <div
                             id="dropdownSearch"
-                            className="z-10 bg-white rounded-none h-auto relative overflow-y-scroll w-full dark:bg-gray-700 mt-2"
+                            className="z-10 bg-white h-[300px] rounded-none relative overflow-y-scroll w-full dark:bg-gray-700 mt-2"
                           >
                             <div className="p-3">
                               <label

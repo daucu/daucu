@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-export default function Page(params) {
+export default function Page() {
   const router = useRouter();
 
   const [gettingCr, setGettingCr] = useState(true);
@@ -14,7 +14,7 @@ export default function Page(params) {
     setGettingCr(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/cr/registries`, {
+        .get(`/api/cr/registries`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -52,7 +52,7 @@ export default function Page(params) {
     setCreatingCr(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/cr/create`,
+        `/api/cr/create`,
         {
           name: name,
           size: size,
@@ -84,7 +84,7 @@ export default function Page(params) {
   async function deleteCr(label) {
     setDeleteCrLabel(label);
     await axios
-      .delete(`${process.env.NEXT_PUBLIC_API_URL}/v1/cr/delete/${label}`, {
+      .delete(`/api/cr/delete/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -110,7 +110,7 @@ export default function Page(params) {
     <div>
       <div className="flex w-auto h-full flex-col">
         <blockquote className="bg-gray-100 border-blue-600 border-l-[5px] dark:border-gray-500 dark:bg-gray-800">
-          <div className="h-auto dark:bg-slate-900 p-3 space-y-3">
+          <div className="h-auto dark:bg-slate-900 p-2 space-y-3">
             {/* Heading */}
             <div className="flex flex-col justify-between items-start space-y-2">
               <h1 className="text-xl font-bold dark:text-gray-400 text-black">
@@ -149,11 +149,50 @@ export default function Page(params) {
               ) : (
                 <div>
                   {registries === null || registries?.length === 0 ? (
-                    <div className="h-[20vh] w-full flex justify-center items-center">
-                      <p className="text-md font-bold dark:text-gray-400 text-black">
+                    <div className="h-[50vh] w-full flex justify-center items-center">
+                      {/* <p className="text-md font-bold dark:text-gray-400 text-black">
                         No container registry found. Create a new container
                         registry to get started.{" "}
-                      </p>
+                      </p> */}
+                      <div className="w-full flex justify-center h-full items-center">
+                        <div className="text-center flex flex-col items-center justify-center min-h-[50vh]">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="50"
+                            height="50"
+                            fill="currentColor"
+                            class="bi bi-info-square"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                          </svg>
+                          <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-4 underline">
+                            No container registry found.
+                          </h1>
+                          <p className="text-gray-600 mb-4">
+                            No container registry found. Create a new container
+                            registry to get started.
+                          </p>
+                          <button className="btn btn-sm no-animation rounded-sm flex items-center bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <svg
+                              className="w-6 h-6 mr-2"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4v16m8-8H4"
+                              ></path>
+                            </svg>
+                            Create New Registry 
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div>

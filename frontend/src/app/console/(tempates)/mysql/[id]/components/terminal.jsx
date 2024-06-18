@@ -12,7 +12,7 @@ export default function Terminal({ label }) {
     setLoading(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/import-projects`, {
+        .get(`/api/site/import-projects`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,

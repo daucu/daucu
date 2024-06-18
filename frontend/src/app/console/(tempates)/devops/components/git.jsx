@@ -10,7 +10,7 @@ export default function GitConf({ label }) {
     setGettingAccounts(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/auth/get-my-apps`, {
+        .get(`/api/auth/get-my-apps`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ export default function GitConf({ label }) {
     try {
       await axios
         .delete(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/git/delete-app/${installation_id}`,
+          `/api/git/delete-app/${installation_id}`,
           {
             headers: {
               "Content-Type": "application/json", // Set JSON content type header
@@ -101,10 +101,6 @@ export default function GitConf({ label }) {
                   <button
                     className="btn btn-wide btn-info mt-5 no-animation rounded-md capitalize dark:text-slate-800 text-slate-800 disabled:text-white"
                     onClick={() => {
-                      window.open(
-                        "https://github.com/apps/daucu/installations/new",
-                        "_blank"
-                      );
                     }}
                   >
                     Connect To Github

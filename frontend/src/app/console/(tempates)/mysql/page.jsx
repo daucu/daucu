@@ -10,11 +10,44 @@ export default function Page(params) {
   const [gettingClusters, setGettingClusters] = useState(false);
   const [clusters, setClusters] = useState([]);
 
+  const cluster_size = [
+    {
+      ID: "1",
+      Environment: "Minimal Development or Testing",
+      CPU: "1 vCPU",
+      RAM: "1 GB",
+    },
+    {
+      ID: "2",
+      Environment: "Small Development Environment",
+      CPU: "1 vCPU",
+      RAM: "2 GB",
+    },
+    {
+      ID: "3",
+      Environment: "Lightweight Production Environment",
+      CPU: "2 vCPUs",
+      RAM: "4 GB",
+    },
+    {
+      ID: "4",
+      Environment: "Moderate Development or Testing",
+      CPU: "2 vCPUs",
+      RAM: "6 GB",
+    },
+    {
+      ID: "5",
+      Environment: "Small Production Environment",
+      CPU: "3 vCPUs",
+      RAM: "6 GB",
+    },
+  ];
+
   async function getDisk() {
     setGettingClusters(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/mysql/get-clusters`, {
+        .get(`/api/mysql/get-clusters`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -44,7 +77,6 @@ export default function Page(params) {
 
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
-  const [region, setRegion] = useState("ap-south-1");
   const [size, setSize] = useState("20");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +88,7 @@ export default function Page(params) {
     setCreatingDisk(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/mysql/new-cluster`,
+        `/api/mysql/new-cluster`,
         {
           name: name,
           mysql_version: "8.3.0",
@@ -88,14 +120,11 @@ export default function Page(params) {
   //Delete mysql
   async function deleteCluster(id) {
     await axios
-      .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/mysql/delete-cluster/${id}`,
-        {
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        }
-      )
+      .delete(`/api/mysql/delete-cluster/${id}`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         toast(res.data.message, { type: "success" });
         getDisk();
@@ -212,7 +241,7 @@ export default function Page(params) {
                                       className="btn btn-xs rounded-none no-animation"
                                       onClick={() => {
                                         router.push(
-                                          `/console/mysql/${cluster?.namespace}`
+                                          `/console/mysql/details?tab=information&label=${cluster.namespace}`
                                         );
                                       }}
                                     >
@@ -264,162 +293,46 @@ export default function Page(params) {
                 Select Cluster Size* (GB)
               </span>
               <ul class="grid w-full gap-2 md:grid-cols-5 mt-1">
-                <li>
-                  <input
-                    type="radio"
-                    id="1-minute"
-                    name="time"
-                    value="1"
-                    class="hidden peer"
-                    required
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  />
-                  <label
-                    for="1-minute"
-                    class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
-                  >
-                    <div class="block">
-                      <div class="w-full text-base flex flex-col">
-                        {/* Ram and CPU */}
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 GB </span>
-                          <span className="text-xs">Ram</span>
-                        </div>
+                {cluster_size &&
+                  cluster_size.map((item, index) => {
+                    return (
+                      <li>
+                        <input
+                          type="radio"
+                          id={index}
+                          name="time"
+                          value={index}
+                          class="hidden peer"
+                          required
+                          onChange={(e) => {
+                            setSize(index);
+                          }}
+                        />
+                        <label
+                          for={index}
+                          class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
+                        >
+                          <div class="block">
+                            <div class="w-full text-base flex flex-col">
+                              <div className="flex items-center justify-start space-x-1">
+                                <span className="text-[8px] truncate">
+                                  {item.Environment}{" "}
+                                </span>
+                              </div>
+                              {/* Ram and CPU */}
+                              <div className="flex items-center justify-start space-x-1">
+                                <span>{item.RAM} </span>
+                              </div>
 
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 vCPU </span>
-                          <span className="text-xs">CPU</span>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="5-minute"
-                    name="time"
-                    value="5"
-                    class="hidden peer"
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  />
-                  <label
-                    for="5-minute"
-                    class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
-                  >
-                    <div class="block">
-                      <div class="w-full text-base flex flex-col">
-                        {/* Ram and CPU */}
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 GB </span>
-                          <span className="text-xs">Ram</span>
-                        </div>
-
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 vCPU </span>
-                          <span className="text-xs">CPU</span>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="10-minute"
-                    name="time"
-                    value="10"
-                    class="hidden peer"
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  />
-                  <label
-                    for="10-minute"
-                    class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
-                  >
-                    <div class="block">
-                      <div class="w-full text-base flex flex-col">
-                        {/* Ram and CPU */}
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 GB </span>
-                          <span className="text-xs">Ram</span>
-                        </div>
-
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 vCPU </span>
-                          <span className="text-xs">CPU</span>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="15-minute"
-                    name="time"
-                    value="15"
-                    class="hidden peer"
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  />
-                  <label
-                    for="15-minute"
-                    class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
-                  >
-                    <div class="block">
-                      <div class="w-full text-base flex flex-col">
-                        {/* Ram and CPU */}
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 GB </span>
-                          <span className="text-xs">Ram</span>
-                        </div>
-
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 vCPU </span>
-                          <span className="text-xs">CPU</span>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="30-minute"
-                    name="time"
-                    value="30"
-                    class="hidden peer"
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  />
-                  <label
-                    for="30-minute"
-                    class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 dark:border-slate-800 rounded-none cursor-pointer dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 dark:bg-slate-800 dark:text-white"
-                  >
-                    <div class="block">
-                      <div class="w-full text-base flex flex-col">
-                        {/* Ram and CPU */}
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 GB </span>
-                          <span className="text-xs">Ram</span>
-                        </div>
-
-                        <div className="flex items-center justify-start space-x-1">
-                          <span>1 vCPU </span>
-                          <span className="text-xs">CPU</span>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </li>
+                              <div className="flex items-center justify-start space-x-1">
+                                <span>{item.CPU} </span>
+                              </div>
+                            </div>
+                          </div>
+                        </label>
+                      </li>
+                    );
+                  })}
               </ul>
             </label>
             {/* Size */}

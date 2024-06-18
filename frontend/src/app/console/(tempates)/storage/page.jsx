@@ -14,7 +14,7 @@ export default function Page(params) {
     setGettingDisk(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/get-buckets`, {
+        .get(`/api/storage/get-buckets`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ export default function Page(params) {
     setCreatingDisk(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/create-bucket`,
+        `/api/storage/create-bucket`,
         {
           label: name,
           region: region,
@@ -86,7 +86,7 @@ export default function Page(params) {
     setDeleteStorageId(id);
     await axios
       .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/delete-bucket/${id}`,
+        `/api/storage/delete-bucket/${id}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,

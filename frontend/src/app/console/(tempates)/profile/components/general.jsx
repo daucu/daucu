@@ -13,7 +13,7 @@ export default function General(params) {
     setGettingAccounts(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/auth/profile`, {
+        .get(`/api/auth/profile`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ export default function General(params) {
     setGettingAddress(true);
     try {
       await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/auth/my-address`, {
+        .get(`/api/auth/my-address`, {
           headers: {
             "Content-Type": "application/json", // Set JSON content type header
             Authorization: `${localStorage.getItem("token")}`,
@@ -89,7 +89,7 @@ export default function General(params) {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/add-address`,
+          `/api/auth/add-address`,
           {
             company_name: company,
             country: country,
@@ -133,7 +133,7 @@ export default function General(params) {
     setDeleteAddressID(id);
     await axios
       .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/remove-address/${id}`,
+        `/api/auth/remove-address/${id}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,

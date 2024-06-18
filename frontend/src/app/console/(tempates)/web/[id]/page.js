@@ -70,7 +70,7 @@ export default function Page(id) {
   async function getWebsiteDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/kube/get-sites/${label}`, {
+      .get(`/api/kube/get-sites/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -95,7 +95,7 @@ export default function Page(id) {
     setDeleting(true);
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/kube/delete-site`,
+        `/api/kube/delete-site`,
         {
           label: label,
         },
@@ -173,10 +173,8 @@ export default function Page(id) {
                     <button
                       className=" btn rounded-[3px] btn-sm no-animation mt-1 btn-ghost justify-start capitalize dark:text-gray-400 text-black"
                       onClick={() => {
-                        window.open(
-                          `http://${siteDetails?.site?.label}.daucu.site`,
-                          "_blank"
-                        );
+                        var link = "http://" + label + ".daucu.site";
+                        window.open(link, "_blank");
                       }}
                     >
                       <svg

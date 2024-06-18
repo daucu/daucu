@@ -12,7 +12,7 @@ export default function Settings({ label }) {
   async function getDomains() {
     setGettingDomains(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/get-domains/${label}`, {
+      .get(`/api/site/get-domains/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -38,7 +38,7 @@ export default function Settings({ label }) {
     setAdding(true);
     axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/add-domain`,
+        `/api/site/add-domain`,
         {
           domain: domain,
           label: label,
@@ -68,7 +68,7 @@ export default function Settings({ label }) {
   async function deleteDomain(domain) {
     setDeleting(domain);
     axios
-      .delete(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/remove-domain`, {
+      .delete(`/api/site/remove-domain`, {
         data: {
           domain: domain,
           label: label, // Assuming 'label' is defined elsewhere in your code.

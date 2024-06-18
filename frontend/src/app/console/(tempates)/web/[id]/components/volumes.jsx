@@ -14,7 +14,7 @@ export default function Volumes({ label }) {
   async function getVolumes() {
     setGettingVolumes(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/site/get-volumes`, {
+      .get(`/api/site/get-volumes`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -42,7 +42,7 @@ export default function Volumes({ label }) {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/site/create-volume`,
+          `/api/site/create-volume`,
           {
             name: name,
             label: label,
@@ -80,7 +80,7 @@ export default function Volumes({ label }) {
     setDeleting(true);
     await axios
       .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/delete-volume/${selected}`,
+        `/api/site/delete-volume/${selected}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
@@ -108,7 +108,7 @@ export default function Volumes({ label }) {
     setGettingMountedPath(true);
     await axios
       .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/get-mounted-paths/${label}`,
+        `/api/site/get-mounted-paths/${label}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,
@@ -134,7 +134,7 @@ export default function Volumes({ label }) {
     try {
       await axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/v1/site/mount-path`,
+          `/api/site/mount-path`,
           {
             volume: selected,
             volume_name: selectedVolumeName,
@@ -171,7 +171,7 @@ export default function Volumes({ label }) {
     setDeletingPath(id);
     await axios
       .delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/site/unmount-volume/${id}`,
+        `/api/site/unmount-volume/${id}`,
         {
           headers: {
             Authorization: `${localStorage.getItem("token")}`,

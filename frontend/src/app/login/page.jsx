@@ -5,7 +5,6 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-// import * as React from "react";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +17,7 @@ export default function Login() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/login`,
+        `/api/auth/login`,
         {
           email: email,
           password: password,
@@ -31,7 +30,7 @@ export default function Login() {
       );
 
       setTimeout(() => {
-        router.push(`/dashboard/overview`, {
+        router.push(`/console/overview`, {
           scroll: false,
         });
       }, 2000);

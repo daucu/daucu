@@ -27,7 +27,7 @@ export default function Logs({ label }) {
   async function getWebsiteDetails() {
     setGettingDetails(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/kube/get-logs/${label}`, {
+      .get(`/api/kube/get-logs/${label}`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
