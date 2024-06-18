@@ -1,70 +1,3 @@
-# #!/bin/bash
-
-# # Retry function
-# retry() {
-#   local n=1
-#   local max_attempts=3
-#   local delay=5
-#   while true; do
-#     "$@" && break || {
-#       if [[ $n -lt $max_attempts ]]; then
-#         ((n++))
-#         echo "Command failed. Attempt $n/$max_attempts:"
-#         sleep $delay;
-#       else
-#         echo "The command has failed after $n attempts."
-#         return 1
-#       fi
-#     }
-#   done
-# }
-
-# # installs NVM (Node Version Manager)
-# retry curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-# # add the following to your .bashrc or .bash_profile
-# export NVM_DIR="$HOME/.nvm"
-# retry [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# retry [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# # download and install Node.js
-# retry nvm install 20
-
-# # verifies the right Node.js version is in the environment
-# retry node -v # should print `v20.12.2`
-# # verifies the right NPM version is in the environment
-# retry npm -v # should print `10.5.0`
-
-# # Install PM2 
-# retry npm install pm2 -g
-
-
-# # Chnage dir
-# cd /var
-
-# # Clone git repo
-# retry git clone https://github.com/daucu/daucu.git
-
-# # Goto frontend
-# cd /var/daucu/frontend
-
-# # Install frontend dependencies
-# retry npm install
-
-# # Build frontend
-# retry npm run build
-
-# # Run in pm2
-# retry pm2 start npm --name "frontend" -- start
-
-# # Start PM2 on boot
-# retry pm2 startup
-
-# # Save PM2
-# retry pm2 save
-
-
-
 #!/bin/bash
 
 # Retry function
@@ -89,6 +22,33 @@ retry() {
 # Update system
 retry sudo apt-get update -y
 retry sudo apt-get upgrade -y
+
+
+# Function to set a random hostname
+set_random_hostname() {
+  random_string=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+  new_hostname="${random_string}.daucu.com"
+  sudo hostnamectl set-hostname "$new_hostname"
+  echo "Hostname set to $new_hostname"
+}
+
+# Check if hostnamectl command is available
+if ! command -v hostnamectl &> /dev/null; then
+  echo "hostnamectl command not found. This script requires systemd."
+  exit 1
+fi
+
+# Get the current hostname
+current_hostname=$(hostnamectl status --static)
+
+# Check if the hostname is empty or not like anything.anything.anything
+if [[ -z "$current_hostname" || ! "$current_hostname" =~ ^[a-z0-9]+\.[a-z0-9]+\.[a-z0-9]+$ ]]; then
+  echo "Hostname is not set or does not match the pattern anything.anything.anything. Setting a random hostname..."
+  set_random_hostname
+else
+  echo "Current hostname: $current_hostname"
+fi
+
 
 # Install Docker
 retry sudo apt-get install -y docker.io
