@@ -9,5 +9,5 @@
 /frontend/.yarn
 
 /node_modules
-/frontend/.next
+frontend/.next
 /frontend/.yarn

@@ -1,12 +1,4 @@
 {
-  "/console/(tempates)/devops/page": "app/console/(tempates)/devops/page.js",
-  "/console/(tempates)/images/page": "app/console/(tempates)/images/page.js",
-  "/console/(tempates)/devops/deploy/page": "app/console/(tempates)/devops/deploy/page.js",
-  "/console/(tempates)/container-registry/page": "app/console/(tempates)/container-registry/page.js",
-  "/console/(tempates)/mysql/page": "app/console/(tempates)/mysql/page.js",
-  "/console/(tempates)/mysql/[id]/page": "app/console/(tempates)/mysql/[id]/page.js",
-  "/console/(tempates)/scheduler/page": "app/console/(tempates)/scheduler/page.js",
-  "/console/(tempates)/profile/page": "app/console/(tempates)/profile/page.js",
-  "/console/(tempates)/web/page": "app/console/(tempates)/web/page.js",
-  "/console/(tempates)/overview/page": "app/console/(tempates)/overview/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/console/(tempates)/devops/page": "app/console/(tempates)/devops/page.js"
 }

@@ -1,22 +1,9 @@
 {
   "pages": {
-    "/page": [
+    "/console/(tempates)/devops/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/css-node_modules_next_font_google_target_css.css",
-      "static/css/css-src_app_globals_css.css",
-      "static/css/css-node_modules_react-toastify_dist_ReactToastify_css.css",
-      "static/chunks/app/layout.js"
-    ],
-    "/console/(tempates)/overview/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/overview/page.js"
+      "static/chunks/app/console/(tempates)/devops/page.js"
     ],
     "/console/(tempates)/layout": [
       "static/chunks/webpack.js",
@@ -33,56 +20,13 @@
       "static/chunks/main-app.js",
       "static/chunks/app/console/loading.js"
     ],
-    "/console/(tempates)/images/page": [
+    "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/images/page.js"
-    ],
-    "/console/(tempates)/devops/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/devops/page.js"
-    ],
-    "/console/(tempates)/web/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/web/page.js"
-    ],
-    "/console/(tempates)/web/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/css-node_modules_react-quill_dist_quill_snow_css.css",
-      "static/chunks/app/console/(tempates)/web/[id]/page.js"
-    ],
-    "/console/(tempates)/devops/deploy/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/devops/deploy/page.js"
-    ],
-    "/console/(tempates)/container-registry/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/container-registry/page.js"
-    ],
-    "/console/(tempates)/mysql/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/mysql/page.js"
-    ],
-    "/console/(tempates)/mysql/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/mysql/[id]/page.js"
-    ],
-    "/console/(tempates)/scheduler/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/scheduler/page.js"
-    ],
-    "/console/(tempates)/profile/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/profile/page.js"
+      "static/css/css-node_modules_next_font_google_target_css.css",
+      "static/css/css-src_app_globals_css.css",
+      "static/css/css-node_modules_react-toastify_dist_ReactToastify_css.css",
+      "static/chunks/app/layout.js"
     ]
   }
 }
