@@ -1,9 +1,27 @@
 {
   "pages": {
-    "/console/(tempates)/devops/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/devops/page.js"
+      "static/chunks/app/page.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-node_modules_next_font_google_target_css.css",
+      "static/css/css-src_app_globals_css.css",
+      "static/css/css-node_modules_react-toastify_dist_ReactToastify_css.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/login/page.js"
+    ],
+    "/console/(tempates)/overview/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/overview/page.js"
     ],
     "/console/(tempates)/layout": [
       "static/chunks/webpack.js",
@@ -20,13 +38,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/console/loading.js"
     ],
-    "/layout": [
+    "/console/(tempates)/web/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/css-node_modules_next_font_google_target_css.css",
-      "static/css/css-src_app_globals_css.css",
-      "static/css/css-node_modules_react-toastify_dist_ReactToastify_css.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/app/console/(tempates)/web/page.js"
+    ],
+    "/console/(tempates)/images/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/images/page.js"
+    ],
+    "/console/(tempates)/devops/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/devops/page.js"
+    ],
+    "/console/(tempates)/devops/deploy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/devops/deploy/page.js"
     ]
   }
 }
