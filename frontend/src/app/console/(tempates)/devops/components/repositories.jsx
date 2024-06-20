@@ -239,13 +239,13 @@ export default function Repositories() {
                             }}
                             className={`btn btn-sm rounded-md flex capitalize justify-start items-center text-left no-animation ${
                               selectedtAccount === account?.installation_id
-                                ? "btn-active outline outline-4 outline-green-600"
+                                ? "btn-active outline outline-2 outline-green-600"
                                 : ""
                             }`}
                           >
                             <img
                               src={account?.response?.account?.avatar_url}
-                              className="w-5 h-5 rounded-full mr-1"
+                              className="w-5 h-5 rounded-full mr-1 border"
                             />
                             {account?.response?.account?.login}
                           </button>

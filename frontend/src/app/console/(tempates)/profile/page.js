@@ -103,7 +103,7 @@ export default function Page(params) {
                       </svg>
                       General
                     </button>
-                    <button
+                    {/* <button
                       className={`rounded-sm dark:text-gray-400 text-black flex justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "billing"
                           ? "border-l-4 border-blue-600 border"
@@ -125,7 +125,7 @@ export default function Page(params) {
                         <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z" />
                       </svg>
                       Billing
-                    </button>
+                    </button> */}
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "security"

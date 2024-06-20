@@ -104,7 +104,7 @@ export default function Notifications() {
               </div>
             </div>
           ) : (
-            <table className="table table-sm">
+            <table className="table table-sm table-zebra">
               <thead>
                 <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                   <th>Title</th>

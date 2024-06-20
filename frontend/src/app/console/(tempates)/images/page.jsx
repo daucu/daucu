@@ -638,6 +638,24 @@ export default function Page(params) {
     },
   ];
 
+  // Make search working
+  const [search, setSearch] = useState("");
+  const [web_tech_filtered, setWebTechFiltered] = useState(web_tech);
+
+  function searchFilter() {
+    setWebTechFiltered(
+      web_tech.filter(
+        (item) =>
+          item.name.toLowerCase().includes(search.toLowerCase()) ||
+          item.description.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+
+    if (search === "") {
+      setWebTechFiltered(web_tech);
+    }
+  }
+
   const [docker_deploying, setDockerDeploying] = useState(false);
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [template, setTemplate] = useState({});
@@ -718,6 +736,9 @@ export default function Page(params) {
                 <input
                   className="input rounded-sm input-sm input-bordered active bg-slate-200 dark:text-gray-400 text-black dark:bg-slate-800 join-item"
                   placeholder="Search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyUp={searchFilter}
                 />
               </div>
             </div>
@@ -737,7 +758,7 @@ export default function Page(params) {
           </div>
           <div className="h-full overflow-y-scroll relative">
             <div className="w-full mt-4 h-auto inset-0 bottom-0 relative">
-              {web_tech.length === 0 ? (
+              {web_tech_filtered.length === 0 ? (
                 // Loading
                 <div className="flex justify-center items-center">
                   <div className="animate-spin rounded-full h-32 w-32 border-gray-900 border-b-4"></div>
@@ -745,7 +766,7 @@ export default function Page(params) {
               ) : (
                 <ul className="grid gap-2 grid-cols-3 2xl:grid-cols-8 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 select-none">
                   {/* Loop */}
-                  {web_tech.map((item, index) => (
+                  {web_tech_filtered.map((item, index) => (
                     <div
                       key={index}
                       className="inline-flex border-blue-600 justify-start items-start p-3 w-full text-gray-500 cursor-pointer dark:hover:text-gray-300 border-l-4 dark:border-gray-500 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-slate-700 dark:hover:bg-slate-700 bg-slate-200 rounded-sm container z-40"
@@ -765,11 +786,7 @@ export default function Page(params) {
                         />
                         <div className="flex flex-col">
                           <div className="flex w-full justify-between">
-                            <img
-                              src={item.icon}
-                              alt=""
-                              className="w-10 h-10"
-                            />
+                            <img src={item.icon} alt="" className="w-10 h-10" />
                             <div>
                               {/* Pricing */}
                               <div className="flex items-center justify-center">

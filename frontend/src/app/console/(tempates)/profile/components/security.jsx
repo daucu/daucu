@@ -99,7 +99,7 @@ export default function Security() {
         </div>
         <div className="collapse-content flex flex-col dark:text-gray-400 text-black">
           <div className="flex space-x-2">
-            <p className="p-2 border-l-2 border-blue-600 dark:bg-transparent mt-1 w-full justify-between flex">
+            <p className="p-2 border-l-2 border-blue-600 dark:bg-transparent mt-1 w-full justify-between flex items-center">
               <span className="font-bold">Authenticator App</span>{" "}
               <button className="btn btn-sm btn-success rounded-sm">Set up two-factor authentication</button>
             </p>
@@ -127,7 +127,7 @@ export default function Security() {
               </div>
             </div>
           ) : (
-            <table className="table table-sm">
+            <table className="table table-sm table-zebra">
               <thead>
                 <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                   <th>Name</th>

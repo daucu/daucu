@@ -38,11 +38,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/console/(tempates)/web/page.js"
     ],
-    "/console/(tempates)/images/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/console/(tempates)/images/page.js"
-    ],
     "/console/(tempates)/devops/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -73,6 +68,16 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/console/(tempates)/scheduler/page.js"
+    ],
+    "/console/(tempates)/images/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/images/page.js"
+    ],
+    "/console/(tempates)/profile/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/profile/page.js"
     ]
   }
 }

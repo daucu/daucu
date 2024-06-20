@@ -132,14 +132,11 @@ export default function General(params) {
   async function deleteAddress(id) {
     setDeleteAddressID(id);
     await axios
-      .delete(
-        `/api/auth/remove-address/${id}`,
-        {
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        }
-      )
+      .delete(`/api/auth/remove-address/${id}`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         toast(res.data.message, { type: "success" });
         setDeleteAddressID("");
@@ -318,7 +315,7 @@ export default function General(params) {
                 </div>
                 <div className="flex w-full justify-start mt-5">
                   <button
-                    className="btn rounded-none btn-sm btn-wide mt-5 outline-dashed outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white"
+                    className="btn btn-sm btn-wide mt-5 outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white"
                     // onClick={() => setShowModal(true)}
                   >
                     Update info
@@ -413,7 +410,7 @@ export default function General(params) {
                               </td>
                               <th>
                                 <button
-                                  className="btn rounded-none btn-xs outline-dashed outline-black btn-error dark:outline-white outline-[1px] no-animation disabled:bg-slate-500 disabled:text-white"
+                                  className="btn btn-xs outline-black btn-error dark:outline-white outline-[1px] no-animation disabled:bg-slate-500 disabled:text-white"
                                   disabled={deleteAddressID === item._id}
                                   onClick={() => {
                                     deleteAddress(item?._id);
@@ -433,40 +430,11 @@ export default function General(params) {
                 {/* Add Address Button */}
                 <div className="flex w-full justify-start mt-5">
                   <button
-                    className="btn rounded-none btn-sm btn-wide mt-5 outline-dashed outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white"
+                    className="btn btn-sm btn-wide mt-5 outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white"
                     onClick={() => setShowModal(true)}
                   >
                     Add Address
                   </button>
-                </div>
-              </div>
-            </div>
-            {/* Delete account */}
-            <div className="collapse collapse-arrow join-item border dark:border-base-300 border-blue-200 bg-white dark:bg-slate-900 rounded-none">
-              <input type="radio" name="my-accordion-3" checked="checked" />
-              <div className="collapse-title text-xl font-medium dark:text-gray-400 text-black">
-                Delete Account
-              </div>
-              <div className="collapse-content flex flex-col dark:text-gray-400 text-black">
-                <div className="mt-2">
-                  {gettingAccounts ? (
-                    <div className="animate-pulse flex space-x-4">
-                      <div className="flex-1 space-y-4 py-1">
-                        <div className="h-4 bg-slate-400 rounded w-3/4"></div>
-                        <div className="space-y-2">
-                          <div className="h-4 bg-slate-400 rounded"></div>
-                          <div className="h-4 bg-slate-400 rounded w-5/6"></div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="max-h-[65vh]">
-                      {/* Delete account */}
-                      <button className="btn rounded-none btn-sm btn-wide btn-error mt-5 outline-dashed outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white">
-                        <span className="font-bold">Delete Account</span>
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

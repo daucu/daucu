@@ -147,14 +147,21 @@ export default function Dockerfile() {
 
   const [creatingProject, setCreatingProject] = useState("");
 
-  async function createProject(id) {
+  async function createProject(id, label, name) {
     setCreatingProject(id);
     try {
       await axios
         .post(
-          `/api/devops/create-project-from-dockerfile`,
+          `/api/devops/create-project`,
           {
-            id: id,
+            name: name,
+            method: "dockerfile",
+            options: [
+              {
+                id: id,
+                label: label,
+              },
+            ],
           },
           {
             headers: {
@@ -355,7 +362,7 @@ export default function Dockerfile() {
                             <button
                               className="btn btn-xs rounded-[5px] btn-neutral capitalize"
                               onClick={() => {
-                                createProject(item._id);
+                                createProject(item._id, item.label, item.name);
                               }}
                               disabled={creatingProject === item._id}
                             >
