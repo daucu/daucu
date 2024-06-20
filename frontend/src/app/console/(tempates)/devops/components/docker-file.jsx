@@ -2,6 +2,7 @@ import VSEditor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Dockerfile() {
   //Get Dockerfile
@@ -308,7 +309,7 @@ export default function Dockerfile() {
                   </div>
                 </div>
               ) : (
-                <table className="table table-sm">
+                <table className="table table-sm table-zebra">
                   <thead>
                     <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                       <th>Version</th>
@@ -331,11 +332,19 @@ export default function Dockerfile() {
                           </td>
                           <td>{item?.name}</td>
                           <td>{item?.label}</td>
-                          <td> {item?.updatedAt}</td>
-                          <td> {item?.createdAt}</td>
+                          <td>
+                            <span className="text-xs capitalize">
+                              {formatTimeAgo(item?.updatedAt)}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="text-xs capitalize">
+                              {formatTimeAgo(item?.createdAt)}
+                            </span>
+                          </td>
                           <td className="flex space-x-1">
                             <button
-                              className="btn btn-xs rounded-[5px] capitalize"
+                              className="btn btn-xs btn-neutral rounded-[5px] capitalize"
                               onClick={() => {
                                 setUpdateData(item);
                                 setShowUpdateModal(true);
@@ -344,7 +353,7 @@ export default function Dockerfile() {
                               Update
                             </button>
                             <button
-                              className="btn btn-xs rounded-[5px] capitalize"
+                              className="btn btn-xs rounded-[5px] btn-neutral capitalize"
                               onClick={() => {
                                 createProject(item._id);
                               }}

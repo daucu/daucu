@@ -13,11 +13,6 @@
       "static/css/css-node_modules_react-toastify_dist_ReactToastify_css.css",
       "static/chunks/app/layout.js"
     ],
-    "/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/login/page.js"
-    ],
     "/console/(tempates)/overview/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -57,6 +52,27 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/console/(tempates)/devops/deploy/page.js"
+    ],
+    "/console/(tempates)/web/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-node_modules_react-quill_dist_quill_snow_css.css",
+      "static/chunks/app/console/(tempates)/web/[id]/page.js"
+    ],
+    "/console/(tempates)/container-registry/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/container-registry/page.js"
+    ],
+    "/console/(tempates)/mysql/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/mysql/page.js"
+    ],
+    "/console/(tempates)/scheduler/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/console/(tempates)/scheduler/page.js"
     ]
   }
 }

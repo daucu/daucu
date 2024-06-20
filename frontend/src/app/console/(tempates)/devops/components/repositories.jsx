@@ -268,7 +268,7 @@ export default function Repositories() {
                   ) : (
                     <div className="w-full items-start flex max-h-[65vh] h-full">
                       {loading !== true && repos?.length !== 0 ? (
-                        <table className="table table-sm">
+                        <table className="table table-sm table-zebra">
                           <thead>
                             <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                               <th>Name</th>
@@ -309,7 +309,7 @@ export default function Repositories() {
                                   </td>
                                   <th>
                                     <button
-                                      className={`btn btn-xs rounded-[5px] no-animation disabled:bg-slate-700 disabled:text-white dark:btn-info capitalize`}
+                                      className={`btn btn-xs btn-success rounded-[5px] no-animation disabled:bg-slate-700 disabled:text-white dark:btn-neutral capitalize`}
                                       disabled={git_deploying !== ""}
                                       onClick={() => {
                                         gitDeployment(

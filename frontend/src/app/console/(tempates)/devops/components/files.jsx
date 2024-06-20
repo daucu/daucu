@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Uploadfile() {
   const [getting, setGetting] = useState(false);
@@ -245,7 +246,7 @@ export default function Uploadfile() {
           ) : (
             <div>
               {datas && datas?.length !== 0 ? (
-                <table className="table table-sm">
+                <table className="table table-sm table-zebra">
                   <thead>
                     <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                       <th>Version</th>
@@ -268,11 +269,19 @@ export default function Uploadfile() {
                           </td>
                           <td>{item?.name}</td>
                           <td>{item?.label}</td>
-                          <td>{item?.updatedAt}</td>
-                          <td>{item?.createdAt}</td>
-                          <td className="flex space-x-1">
+                          <td>
+                            <span className="text-xs capitalize">
+                              {formatTimeAgo(item?.updatedAt)}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="text-xs capitalize">
+                              {formatTimeAgo(item?.createdAt)}
+                            </span>
+                          </td>
+                          <td className="flex space-x-1 ">
                             <button
-                              className="btn btn-xs rounded-[5px] capitalize"
+                              className="btn btn-xs rounded-[5px] capitalize btn-neutral"
                               onClick={() => {
                                 setUpdateData(item);
                                 setName(item?.name);
@@ -282,7 +291,7 @@ export default function Uploadfile() {
                               Update
                             </button>
                             <button
-                              className="btn btn-xs rounded-[5px] capitalize"
+                              className="btn btn-xs rounded-[5px] capitalize btn-neutral"
                               disabled={creatingProject}
                               onClick={() => {
                                 createProject(item._id, item.label, item.name);

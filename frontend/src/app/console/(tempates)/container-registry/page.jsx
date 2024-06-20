@@ -126,7 +126,7 @@ export default function Page() {
             </div>
             <div>
               <button
-                className="btn btn-sm rounded-sm no-animation capitalize dark:btn-info"
+                className="btn btn-sm no-animation capitalize dark:btn-neutral"
                 onClick={() => {
                   setShowModal(true);
                 }}
@@ -167,14 +167,14 @@ export default function Page() {
                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
                             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
                           </svg>
-                          <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-4 underline">
+                          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-4 mt-4 underline">
                             No container registry found.
                           </h1>
-                          <p className="text-gray-600 mb-4">
+                          <p className="text-gray-600 mb-4 dark:text-gray-400">
                             No container registry found. Create a new container
                             registry to get started.
                           </p>
-                          <button className="btn btn-sm no-animation rounded-sm flex items-center bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                          <button className="btn btn-sm no-animation flex items-center btn-neutral text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
                             <svg
                               className="w-6 h-6 mr-2"
                               fill="none"

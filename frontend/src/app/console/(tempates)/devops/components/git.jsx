@@ -99,7 +99,7 @@ export default function GitConf({ label }) {
               <div className="collapse-content flex flex-col dark:text-gray-400 text-black">
                 <div className="flex space-x-4">
                   <button
-                    className="btn btn-wide btn-info mt-5 no-animation rounded-md capitalize dark:text-slate-800 text-slate-800 disabled:text-white"
+                    className="btn btn-wide btn-neutral mt-5 no-animation rounded-md capitalize disabled:text-white"
                     onClick={() => {
                     }}
                   >
@@ -190,7 +190,7 @@ export default function GitConf({ label }) {
                         <div className="space-x-2 flex ">
                           <img
                             src={account?.response?.account?.avatar_url}
-                            className="w-5 h-5 rounded-full mr-1"
+                            className="w-5 h-5 rounded-full mr-1 border"
                           />
                           <span className="text-md ml-5">
                             {account?.response?.account?.login}

@@ -87,7 +87,7 @@ export default function ThirdParty() {
                     className="input w-full rounded-sm bg-slate-50 dark:bg-transparent input-bordered border-blue-600"
                   />
                   <button
-                    className="mt-5 btn rounded-md btn-wide btn-md dark:btn-info disabled:bg-slate-500 disabled:text-slate-200 no-animation capitalize"
+                    className="mt-5 btn rounded-md btn-wide btn-md dark:btn-neutral disabled:bg-slate-500 disabled:text-slate-200 no-animation capitalize"
                     disabled={git_deploying}
                     onClick={() => {
                       gitDeployment();

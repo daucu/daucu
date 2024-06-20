@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Projects(params) {
   const router = useRouter();
@@ -151,7 +152,7 @@ export default function Projects(params) {
                 ) : (
                   <div className="w-full absolute items-start flex">
                     {repos && repos?.length !== 0 ? (
-                      <table className="table table-sm">
+                      <table className="table table-sm table-zebra">
                         {/* head */}
                         <thead>
                           <tr className="dark:bg-slate-900 dark:text-gray-400 text-black bg-white">
@@ -171,39 +172,27 @@ export default function Projects(params) {
                                 key={index}
                                 className="dark:bg-slate-900 rounded-sm bg-white"
                               >
-                                {/* <td>
-                                <div className="flex items-center">
-                                  <div>
-                                    <div className="font-light">
-                                      {repo?.label ?? "NoN"}
-                                    </div>
-                                  </div>
-                                </div>
-                              </td> */}
                                 <td>
                                   <div className="flex items-center space-x-3">
                                     <div className="avatar">
                                       <div className="mask mask-square rounded-md bg-slate-300 flex justify-center items-center p-0">
-                                        <div className="w-[50px] h-[50px] flex justify-center items-center relative">
+                                        <div className="w-[40px] h-[40px] flex justify-center items-center relative">
                                           <img src={repo?.icon} alt="icon" />
                                         </div>
                                       </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                      <div className="font-bold truncate w-36">
-                                        {repo?.name ?? "NoN"}
-                                      </div>
-                                      <span>
-                                        Version:{" "}
+                                    <div className="flex">
+                                      <div className="font-bold truncate w-36 flex space-x-2">
+                                        <span className="">{repo?.name ?? "NoN"}</span>{" "}
                                         <span className="text-blue-500 hover:underline cursor-pointer font-bold">
                                           #{repo?.project_version ?? "NoN"}
                                         </span>
-                                      </span>
+                                      </div>
                                     </div>
                                   </div>
                                 </td>
                                 <td className="">
-                                  <div className="font-light text-xs uppercase">
+                                  <div className="font-light text-xs capitalize">
                                     {repo?.runtime ?? "NoN"}
                                   </div>
                                 </td>
@@ -213,37 +202,139 @@ export default function Projects(params) {
                                   </div>
                                 </td>
                                 <td className="">
-                                  <div className="font-light text-xs uppercase">
+                                  <div className="font-light text-xs capitalize">
                                     {repo?.framework === ""
                                       ? "------------"
                                       : repo?.framework}
                                   </div>
                                 </td>
-                                <td>{repo?.createdAt ?? "NoN"}</td>
-                                <td className="">
-                                  <div className="font-light text-xs uppercase">
-                                    {repo?.status ?? "NoN"}
+                                <td>
+                                  <div className="text-xs capitalize">
+                                    {formatTimeAgo(repo?.createdAt)}
                                   </div>
                                 </td>
-                                <th className="space-x-2">
-                                  <button
-                                    className="btn rounded-none btn-xs mt-5 outline-dashed outline-black dark:outline-white outline-[1px] btn-error no-animation disabled:bg-slate-500 disabled:text-white"
-                                    onClick={(e) => {
-                                      deleteProject(repo?._id);
-                                    }}
-                                  >
-                                    Delete
-                                  </button>
-                                  <button
-                                    className="btn rounded-none btn-xs mt-5 outline-dashed outline-black dark:outline-white outline-[1px] no-animation disabled:bg-slate-500 disabled:text-white"
-                                    onClick={(e) => {
-                                      router.push(
-                                        `/console/devops/deploy?ProjectID=${repo?._id}`
-                                      );
-                                    }}
-                                  >
-                                    View
-                                  </button>
+                                <td className="">
+                                  <div className="font-light text-xs uppercase">
+                                    {/* Show status icon and name based on repo status */}
+                                    <div className="flex items-center space-x-2">
+                                      {repo?.status === "building" && (
+                                        <div className="flex items-center space-x-1">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-yellow-500"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                            ></path>
+                                          </svg>
+                                          <span className="text-yellow-500">
+                                            Building
+                                          </span>
+                                        </div>
+                                      )}
+
+                                      {repo?.status === "ready" && (
+                                        <div className="flex items-center space-x-1">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-green-500"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M5 13l4 4L19 7"
+                                            ></path>
+                                          </svg>
+                                          <span className="text-green-500">
+                                            Ready
+                                          </span>
+                                        </div>
+                                      )}
+
+                                      {repo?.status === "failed" && (
+                                        <div className="flex items-center space-x-1">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-red-500"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M6 18L18 6M6 6l12 12"
+                                            ></path>
+                                          </svg>
+                                          <span className="text-red-500">
+                                            Failed
+                                          </span>
+                                        </div>
+                                      )}
+
+                                      {repo?.status === "pending" && (
+                                        <div className="flex items-center space-x-1">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-blue-500"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M13 10V3L4 14h7v7l9-11h-7z"
+                                            ></path>
+                                          </svg>
+                                          <span className="text-blue-500">
+                                            Pending
+                                          </span>
+                                        </div>
+                                      )}
+
+                                      {!repo?.status && (
+                                        <span className="text-gray-500">
+                                          No Status
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </td>
+
+                                <th>
+                                  <div className="space-x-2 flex items-center">
+                                    <button
+                                      className="btn btn-xs rounded-sm outline-black dark:outline-white btn-error no-animation disabled:bg-slate-500 disabled:text-white"
+                                      onClick={(e) => {
+                                        deleteProject(repo?._id);
+                                      }}
+                                    >
+                                      Delete
+                                    </button>
+                                    <button
+                                      className="btn rounded-sm btn-xs btn-neutral dark:outline-white no-animation disabled:bg-slate-500 disabled:text-white"
+                                      onClick={(e) => {
+                                        router.push(
+                                          `/console/devops/deploy?ProjectID=${repo?._id}`
+                                        );
+                                      }}
+                                    >
+                                      View
+                                    </button>
+                                  </div>
                                 </th>
                               </tr>
                             ))}
