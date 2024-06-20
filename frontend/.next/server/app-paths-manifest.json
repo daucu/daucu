@@ -1,4 +1,5 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/console/(tempates)/web/[id]/page": "app/console/(tempates)/web/[id]/page.js",
   "/console/(tempates)/container-registry/page": "app/console/(tempates)/container-registry/page.js",
   "/console/(tempates)/mysql/page": "app/console/(tempates)/mysql/page.js",
