@@ -1,13 +1,8 @@
 
 
 /frontend/node_modules
+/frontend/.next
 /frontend/.yarn
 /frontend/package-lock.json
 
-
-/frontend/.next
-/frontend/.yarn
-
-/node_modules
-frontend/.next
-/frontend/.yarn
+/node_modules   

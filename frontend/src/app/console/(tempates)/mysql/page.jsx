@@ -161,7 +161,7 @@ export default function Page(params) {
 
             <div>
               <button
-                className="btn btn-sm rounded-none no-animation dark:btn-info btn-glass capitalize"
+                className="btn btn-sm no-animation btn-neutral dark:btn-neutral btn-glass capitalize"
                 onClick={() => {
                   setShowModal(true);
                 }}
@@ -192,10 +192,10 @@ export default function Page(params) {
                   ) : (
                     <div>
                       <div className="overflow-x-auto">
-                        <table className="table table-sm">
+                        <table className="table table-sm table-zebra">
                           {/* head */}
                           <thead>
-                            <tr className="dark:bg-slate-700 bg-slate-200 dark:text-gray-400 text-black">
+                            <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
                               <th></th>
                               <th>Cluster Name</th>
                               <th>MySQL Version</th>
@@ -204,14 +204,14 @@ export default function Page(params) {
                               <th>Action</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="mt-5 dark:text-gray-400 text-black">
                             {/* Map Disk */}
                             {clusters &&
                               clusters !== null &&
                               clusters?.map((cluster, index) => (
                                 <tr
                                   key={index}
-                                  className="dark:bg-slate-700 bg-slate-200 dark:text-gray-400 text-black"
+                                  className="dark:bg-slate-900 rounded-sm bg-white"
                                 >
                                   <th>1</th>
                                   <td>{cluster?.name}</td>
@@ -230,7 +230,7 @@ export default function Page(params) {
                                   <td>{cluster?.createdAt}</td>
                                   <td className="space-x-1">
                                     <button
-                                      className="btn btn-xs rounded-none btn-error no-animation"
+                                      className="btn btn-xs btn-error no-animation"
                                       onClick={() => {
                                         deleteCluster(cluster?._id);
                                       }}
@@ -238,7 +238,7 @@ export default function Page(params) {
                                       Delete
                                     </button>
                                     <button
-                                      className="btn btn-xs rounded-none no-animation"
+                                      className="btn btn-xs btn-neutral no-animation"
                                       onClick={() => {
                                         router.push(
                                           `/console/mysql/details?tab=information&label=${cluster.namespace}`
