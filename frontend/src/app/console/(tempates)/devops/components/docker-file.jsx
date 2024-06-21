@@ -274,9 +274,7 @@ export default function Dockerfile() {
             </div>
           ) : (
             <div>
-              {dockerfiles === undefined ||
-              dockerfiles?.length === 0 ||
-              dockerfiles === null ? (
+              {dockerfiles && dockerfiles?.length <= 0 ? (
                 <div className="w-full flex justify-center h-full items-center">
                   <div className="text-center flex flex-col items-center justify-center min-h-[50vh]">
                     <svg

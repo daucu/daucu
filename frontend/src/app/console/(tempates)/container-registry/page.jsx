@@ -126,7 +126,7 @@ export default function Page() {
             </div>
             <div>
               <button
-                className="btn btn-sm no-animation capitalize dark:btn-neutral"
+                className="btn btn-sm no-animation btn-neutral capitalize dark:btn-neutral"
                 onClick={() => {
                   setShowModal(true);
                 }}

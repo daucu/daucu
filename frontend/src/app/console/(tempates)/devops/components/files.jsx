@@ -245,7 +245,7 @@ export default function Uploadfile() {
             </div>
           ) : (
             <div>
-              {datas && datas?.length !== 0 ? (
+              {datas && datas?.length >= 0 ? (
                 <table className="table table-sm table-zebra">
                   <thead>
                     <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
