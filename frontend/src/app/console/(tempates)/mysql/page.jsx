@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Page(params) {
   const router = useRouter();
@@ -142,34 +143,36 @@ export default function Page(params) {
 
   return (
     <div>
-      <div className="flex w-auto h-full flex-col">
+      <div className="flex w-auto h-full flex-col space-y-2">
+        <div className="bg-gray-100 border-l-[5px] border-blue-600 dark:border-gray-500 dark:bg-slate-900 p-2 grid grid-cols-10">
+          {/* Heading */}
+          <div className="flex flex-col justify-between items-start col-span-8">
+            <h1 className="text-xl font-bold dark:text-gray-400 text-black">
+              MySQL database Cluster
+            </h1>
+            <span className="text dark:text-gray-400 text-black text-xs">
+              A Managed MySQL Database service simplifies MySQL database hosting
+              and administration, taking care of infrastructure, backups, high
+              availability, security, and scaling. It enables businesses to
+              focus on their applications and data rather than the complexities
+              of database management.
+            </span>
+          </div>
+
+          <div className="col-span-2 flex items-center justify-end">
+            <button
+              className="btn btn-sm btn-wide no-animation btn-neutral dark:btn-neutral btn-glass capitalize"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              Create Cluster
+            </button>
+          </div>
+        </div>
         <blockquote className="bg-gray-100 border-l-[5px] border-blue-600 dark:border-gray-500 dark:bg-gray-800">
           <div className="h-auto dark:bg-slate-900 p-2 space-y-3">
-            {/* Heading */}
-            <div className="flex flex-col justify-between items-start">
-              <h1 className="text-xl font-bold dark:text-gray-400 text-black">
-                MySQL database Cluster
-              </h1>
-              <span className="text dark:text-gray-400 text-black text-xs">
-                A Managed MySQL Database service simplifies MySQL database
-                hosting and administration, taking care of infrastructure,
-                backups, high availability, security, and scaling. It enables
-                businesses to focus on their applications and data rather than
-                the complexities of database management.
-              </span>
-            </div>
-
-            <div>
-              <button
-                className="btn btn-sm no-animation btn-neutral dark:btn-neutral btn-glass capitalize"
-                onClick={() => {
-                  setShowModal(true);
-                }}
-              >
-                Create Cluster
-              </button>
-            </div>
-            <div className="max-h-[75vh] mt-5 overflow-y-scroll">
+            <div className="max-h-[75vh] mt-2 overflow-y-scroll">
               {/* Table */}
               {gettingClusters ? (
                 <div className="animate-pulse flex space-x-4">
@@ -191,12 +194,19 @@ export default function Page(params) {
                     </div>
                   ) : (
                     <div>
-                      <div className="overflow-x-auto">
-                        <table className="table table-sm table-zebra">
+                      {/* Filter  */}
+                      <div className="flex justify-between">
+                        <input placeholder="Filter..." className="input rounded-sm input-sm input-bordered" />
+                        <button className="btn-sm btn rounded-sm">
+                          View
+                        </button>
+                      </div>
+                      <div className="overflow-x-auto mt-5">
+                        <table className="table table-sm">
                           {/* head */}
                           <thead>
                             <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
-                              <th></th>
+                              <th>#</th>
                               <th>Cluster Name</th>
                               <th>MySQL Version</th>
                               <th>Hight Availability</th>
@@ -213,7 +223,7 @@ export default function Page(params) {
                                   key={index}
                                   className="dark:bg-slate-900 rounded-sm bg-white"
                                 >
-                                  <th>1</th>
+                                  <th>{index + 1}</th>
                                   <td>{cluster?.name}</td>
                                   <td>{cluster?.mysql_version}</td>
                                   <td>
@@ -227,10 +237,13 @@ export default function Page(params) {
                                       </span>
                                     )}
                                   </td>
-                                  <td>{cluster?.createdAt}</td>
+                                  <td>
+                                    {/* {cluster?.createdAt} */}
+                                    {formatTimeAgo(cluster?.updatedAt)}
+                                  </td>
                                   <td className="space-x-1">
                                     <button
-                                      className="btn btn-xs btn-error no-animation"
+                                      className="btn btn-xs rounded-sm btn-error no-animation"
                                       onClick={() => {
                                         deleteCluster(cluster?._id);
                                       }}
@@ -238,7 +251,7 @@ export default function Page(params) {
                                       Delete
                                     </button>
                                     <button
-                                      className="btn btn-xs btn-neutral no-animation"
+                                      className="btn btn-xs rounded-sm btn-neutral no-animation"
                                       onClick={() => {
                                         router.push(
                                           `/console/mysql/details?tab=information&label=${cluster.namespace}`
