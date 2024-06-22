@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/console/(tempates)/web/page": "app/console/(tempates)/web/page.js",
-  "/console/(tempates)/container-registry/page": "app/console/(tempates)/container-registry/page.js",
-  "/console/(tempates)/mysql/page": "app/console/(tempates)/mysql/page.js",
-  "/console/(tempates)/mysql/[id]/page": "app/console/(tempates)/mysql/[id]/page.js",
-  "/console/(tempates)/devops/page": "app/console/(tempates)/devops/page.js"
-}
