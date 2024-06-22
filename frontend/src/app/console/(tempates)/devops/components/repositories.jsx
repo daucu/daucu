@@ -191,7 +191,7 @@ export default function Repositories() {
                 <div className="flex justify-between">
                   <div className="w-[50%] flex items-center space-x-2">
                     <input
-                      className="input input-sm text-white"
+                      className="input input-sm dark:text-white input-bordered"
                       placeholder="Search"
                     />
                     <div className="join grid grid-cols-2">
