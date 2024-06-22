@@ -88,7 +88,7 @@ export default function Page(id) {
   return (
     <div>
       <div className="flex w-auto flex-col h-auto absolute inset-0 bottom-2 top-2 ml-2 mr-2 dark:bg-slate-900">
-        <blockquote className="bg-white border-l-[5px] border-blue-300 dark:border-gray-500 dark:bg-gray-900 relative h-full">
+        <blockquote className="bg-white border-l-[5px] border-blue-600 dark:border-gray-500 dark:bg-gray-900 relative h-full">
           <div className="h-full relative dark:bg-slate-900 p-2 flex flex-col justify-between space-y-3">
             {/* Heading */}
             <div className="flex flex-col justify-between items-start h-[50px]">
@@ -103,7 +103,7 @@ export default function Page(id) {
             {/* Main */}
             <div className="h-full flex">
               {/* Left */}
-              <div className="row-span-9 col-span-10 dark:bg-slate-800 border-t-[5px] border-blue-300 dark:border-gray-500 mr-2 min-w-[300px] bg-slate-100">
+              <div className="row-span-9 col-span-10 dark:bg-slate-800 border-t-[5px] border-blue-600 dark:border-gray-500 mr-2 min-w-[300px] bg-slate-100">
                 <div className="row-span-2 col-span-2">
                   <ul className="menu rounded-sm dark:text-gray-400 text-black h-full">
                     <li className="menu-title dark:text-gray-400 text-black">
@@ -113,7 +113,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "information"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -139,7 +139,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "databases"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -235,7 +235,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "compute-storage"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -262,7 +262,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black items-center flex justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "logs"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -310,7 +310,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "metrics"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -333,7 +333,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "replication"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -356,7 +356,7 @@ export default function Page(id) {
                     <button
                       className={`rounded-sm dark:text-gray-400 text-black flex items-center justify-start btn-will hover:bg-slate-300 dark:hover:bg-slate-700 p-2 ${
                         selectedTab == "settings"
-                          ? "border-l-4 border-blue-300 border"
+                          ? "border-l-4 border-blue-600 border"
                           : "border-l-4 border-transparent border"
                       }`}
                       onClick={() => {
@@ -381,7 +381,7 @@ export default function Page(id) {
               </div>
 
               {/* Right Area */}
-              <div className="row-span-3 col-span-9 dark:bg-slate-800 w-full h-auto p-3 border-t-[5px] border-blue-300 dark:border-gray-500 bg-slate-100 relative">
+              <div className="row-span-3 col-span-9 dark:bg-slate-800 w-full h-auto p-3 border-t-[5px] border-blue-600 dark:border-gray-500 bg-slate-100 relative">
                 {content}
               </div>
             </div>

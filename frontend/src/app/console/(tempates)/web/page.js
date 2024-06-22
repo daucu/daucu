@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Page(params) {
   const router = useRouter();
@@ -173,7 +174,7 @@ export default function Page(params) {
                                     overflow: "hidden",
                                   }}
                                 >
-                                  {item?.createdAt}
+                                  {formatTimeAgo(item?.createdAt)}
                                 </div>
                               </div>
                             </div>

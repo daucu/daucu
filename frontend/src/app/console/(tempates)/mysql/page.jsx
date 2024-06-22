@@ -244,7 +244,7 @@ export default function Page(params) {
                                     overflow: "hidden",
                                   }}
                                 >
-                                  {item?.createdAt}
+                                  {formatTimeAgo(item?.createdAt)}
                                 </div>
                               </div>
                             </div>
