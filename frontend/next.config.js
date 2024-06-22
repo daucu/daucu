@@ -8,11 +8,15 @@ const nextConfig = {
         },
       ],
     },
+    experimental: {
+      proxyTimeout: 1000 * 600,
+    },
     async rewrites() {
       return [
         {
           source: '/api/:path*',
           destination: 'http://localhost:9000/api/:path*' // Proxy to Backend
+          // Timeout
         },
         {
           source: '/install/:path*',

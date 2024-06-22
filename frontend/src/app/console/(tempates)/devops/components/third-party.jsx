@@ -10,17 +10,29 @@ export default function ThirdParty() {
   const [git_deploying, setGitDeploying] = useState(false);
   const [clone_url, setClone_url] = useState("");
 
+  function getRepoName(url) {
+    // Extract the repository name from the GitHub URL
+    const parts = url.split("/");
+    // The repository name is the last part of the URL
+    const repoName = parts[parts.length - 1].replace(".git", "");
+    return repoName;
+  }
+
+  const repoName = getRepoName(clone_url);
+
   async function gitDeployment() {
     setGitDeploying(true);
     await axios
       .post(
         `/api/devops/create-project`,
         {
-          context: {
-            type: "public_git",
-            context: clone_url,
-          },
-          name: "Text",
+          name: repoName,
+          method: "git",
+          options: [
+            {
+              url: clone_url,
+            },
+          ],
         },
         {
           headers: {
@@ -32,9 +44,7 @@ export default function ThirdParty() {
         console.log(res.data);
         setGitDeploying(false);
         //Navigate to deploy page with ImportedID
-        router.push(
-          `/console/devops/deploy?ProjectID=${res.data?.ImportedID}`
-        );
+        router.push(`/console/devops/deploy?ProjectID=${res.data?.ImportedID}`);
         toast(res.data.message, { type: "success" });
       })
       .catch((err) => {
