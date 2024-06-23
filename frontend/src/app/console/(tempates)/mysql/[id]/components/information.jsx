@@ -2,16 +2,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from "next/navigation";
+import { formatTimeAgo } from "@/app/utils/formatTimeAgo";
 
 export default function Information({ label }) {
   const [gettingDetails, setGettingDetails] = useState(true);
   const [siteDetails, setSiteDetails] = useState(null);
 
-  const searchParams = useSearchParams()
-  const search_label = searchParams.get('label')
+  const searchParams = useSearchParams();
+  const search_label = searchParams.get("label");
 
-  console.log(search_label)
+  const navigate = useRouter();
+
+  console.log(search_label);
 
   //Get websites details
   async function getWebsiteDetails() {
@@ -33,6 +36,30 @@ export default function Information({ label }) {
         toast(err.response?.data?.message, { type: "error" });
       });
   }
+
+  const [deletingCluster, setDeletingCluster] = useState(false);
+  //Delete mysql
+  async function deleteCluster() {
+    setDeletingCluster(true);
+    await axios
+      .delete(`/api/mysql/delete-cluster/${siteDetails?._id}`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        toast(res.data.message, { type: "success" });
+        setDeletingCluster(false);
+        // Navigate to the dashboard
+        navigate.push("/console/mysql");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast(err.response.data.message, { type: "error" });
+        setDeletingCluster(false);
+      });
+  }
+
   useEffect(() => {
     getWebsiteDetails();
   }, []);
@@ -183,8 +210,16 @@ export default function Information({ label }) {
                     ) : (
                       <div className="">
                         {/* Delete account */}
-                        <button className="btn rounded-none btn-sm btn-wide btn-error outline-dashed outline-black dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white">
-                          <span className="font-bold">Delete Account</span>
+                        <button
+                          className="btn btn-sm btn-wide btn-error dark:outline-white outline-[2px] no-animation disabled:bg-slate-500 disabled:text-white"
+                          onClick={() => deleteCluster()}
+                          disabled={deletingCluster}
+                        >
+                          <span className="font-bold">
+                            {deletingCluster
+                              ? "Deleting Cluster..."
+                              : "Delete Cluster"}
+                          </span>
                         </button>
                       </div>
                     )}
