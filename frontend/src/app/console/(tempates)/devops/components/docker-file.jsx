@@ -274,46 +274,7 @@ export default function Dockerfile() {
             </div>
           ) : (
             <div>
-              {dockerfiles && dockerfiles?.length <= 0 ? (
-                <div className="w-full flex justify-center h-full items-center">
-                  <div className="text-center flex flex-col items-center justify-center min-h-[50vh]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="50"
-                      height="50"
-                      fill="currentColor"
-                      class="bi bi-info-square"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                    </svg>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-4 underline">
-                      No Dockerfile Found
-                    </h1>
-                    <p className="text-gray-600 mb-4">
-                      It looks like you haven't created any dockerfile yet.
-                    </p>
-                    <button className="btn btn-sm no-animation rounded-sm flex items-center bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                      <svg
-                        className="w-6 h-6 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 4v16m8-8H4"
-                        ></path>
-                      </svg>
-                      Create New Dockerfile
-                    </button>
-                  </div>
-                </div>
-              ) : (
+              {dockerfiles && dockerfiles?.length >= 0 ? (
                 <table className="table table-sm table-zebra">
                   <thead>
                     <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
@@ -382,6 +343,45 @@ export default function Dockerfile() {
                       ))}
                   </tbody>
                 </table>
+              ) : (
+                <div className="w-full flex justify-center h-full items-center">
+                  <div className="text-center flex flex-col items-center justify-center min-h-[50vh]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="50"
+                      height="50"
+                      fill="currentColor"
+                      class="bi bi-info-square"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-4 underline">
+                      No Dockerfile Found
+                    </h1>
+                    <p className="text-gray-600 mb-4">
+                      It looks like you haven't created any dockerfile yet.
+                    </p>
+                    <button className="btn btn-sm no-animation rounded-sm flex items-center bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                      <svg
+                        className="w-6 h-6 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 4v16m8-8H4"
+                        ></path>
+                      </svg>
+                      Create New Dockerfile
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
           )}

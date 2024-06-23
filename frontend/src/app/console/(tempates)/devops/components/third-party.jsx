@@ -44,7 +44,7 @@ export default function ThirdParty() {
         console.log(res.data);
         setGitDeploying(false);
         //Navigate to deploy page with ImportedID
-        router.push(`/console/devops/deploy?ProjectID=${res.data?.ImportedID}`);
+        // router.push(`/console/devops/deploy?ProjectID=${res.data?.ImportedID}`);
         toast(res.data.message, { type: "success" });
       })
       .catch((err) => {

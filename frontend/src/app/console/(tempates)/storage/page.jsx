@@ -114,7 +114,7 @@ export default function Page(params) {
     <div>
       <div className="flex w-auto h-full flex-col">
         <blockquote className="bg-gray-100 border-l-[5px] border-blue-600 dark:border-gray-500 dark:bg-gray-800">
-          <div className="h-auto dark:bg-slate-900 p-3">
+          <div className="h-auto dark:bg-slate-900 p-2">
             {/* Heading */}
             <div className="flex flex-col justify-between items-start h-[50px]">
               <h1 className="text-xl font-bold dark:text-gray-400 text-black">

@@ -108,14 +108,28 @@ export default function Repositories() {
     await axios
       .post(
         `/api/devops/create-project`,
+        // {
+        //   name: name,
+        //   context: {
+        //     type: "git",
+        //     context: clone_url,
+        //     username: selectedUser,
+        //     installation_id: selectedtAccount.toString(),
+        //   },
+        // },
         {
           name: name,
-          context: {
-            type: "git",
-            context: clone_url,
-            username: selectedUser,
-            installation_id: selectedtAccount.toString(),
-          },
+          method: "git",
+          options: [
+            {
+              is_public: false,
+              git_provider: "github",
+              id: id,
+              url: clone_url,
+              username: selectedUser,
+              installation_id: selectedtAccount.toString(),
+            },
+          ],
         },
         {
           headers: {
@@ -271,6 +285,7 @@ export default function Repositories() {
                         <table className="table table-sm table-zebra">
                           <thead>
                             <tr className="dark:bg-slate-900 rounded-sm bg-white dark:text-gray-400 text-black">
+                              <th>Serial</th>
                               <th>Name</th>
                               <th>Language</th>
                               <th>Date</th>
@@ -285,6 +300,7 @@ export default function Repositories() {
                                   key={index}
                                   className="dark:bg-slate-900 rounded-sm bg-white"
                                 >
+                                  <td>{index + 1}</td>
                                   <td>
                                     <div className="flex items-center">
                                       <div>
