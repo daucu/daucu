@@ -24,19 +24,19 @@ retry sudo apt-get update -y
 retry sudo apt-get upgrade -y
 
 
-# Function to set a random hostname
-set_random_hostname() {
-  random_string=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
-  new_hostname="${random_string}.daucu.com"
-  sudo hostnamectl set-hostname "$new_hostname"
-  echo "Hostname set to $new_hostname"
-}
+# # Function to set a random hostname
+# set_random_hostname() {
+#   random_string=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+#   new_hostname="${random_string}.daucu.com"
+#   sudo hostnamectl set-hostname "$new_hostname"
+#   echo "Hostname set to $new_hostname"
+# }
 
 # Check if hostnamectl command is available
-if ! command -v hostnamectl &> /dev/null; then
-  echo "hostnamectl command not found. This script requires systemd."
-  exit 1
-fi
+# if ! command -v hostnamectl &> /dev/null; then
+#   echo "hostnamectl command not found. This script requires systemd."
+#   exit 1
+# fi
 
 # Get the current hostname
 current_hostname=$(hostnamectl status --static)
