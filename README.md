@@ -6,11 +6,6 @@
 
 Daucu is an innovative self-hosted cloud platform designed to streamline the process of developing, deploying, and maintaining applications. Engineered for flexibility and control, Daucu empowers developers and organizations to manage their entire application lifecycle within their own infrastructure. 
 
-## Requirements
-
-- Ubuntu 18, 20, 22
-- Upto 4 GB CPU
-
 ## Installation
 
 1. Run command on your ubuntu server:
