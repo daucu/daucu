@@ -1,4 +1,4 @@
-[![Join our Discord server!](https://img.shields.io/discord/1239945892136751146?color=7289da&label=Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/PCG8vUAm)
+[[[![Join our Discord server!](https://img.shields.io/discord/1239945892136751146?color=7289da&label=Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/PCG8vUAm)](https://discord.gg/4Zsxnvkg)](https://discord.gg/4Zsxnvkg)
 
 
 
